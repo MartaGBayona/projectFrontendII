@@ -1,5 +1,5 @@
 import { CustomLink } from "../CustomLink/CustomLink"
-import { CustomInput } from "../CustomInput/CustomInput";
+import { CustomInputHeader } from "../CustomInput/CustomInput";
 import { useState, useEffect } from "react";
 import "./Header.css"
 
@@ -33,7 +33,7 @@ export const Header = () => {
 
     return (
         <div className="headerDesign">
-            <CustomInput
+            <CustomInputHeader
                 type="text"
                 name="criteria"
                 value={criteria || ""}

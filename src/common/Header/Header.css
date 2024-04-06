@@ -1,17 +1,36 @@
 .headerDesign {
-    height: 12vh;
+
+    height:4vh;
     width: 100vw;
 
-    background-color: darkcyan;
+    background-color: rgb(260, 260, 260);
+
+    color: aliceblue;
 
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: 0.3s;
+    overflow-x: hidden;
+
+}
+
+.headerScroll {
+    transition: 0.3s;
+    opacity: 0;
+    color: rgb(220, 160, 80);
 }
 
 .navigatorDesign {
     display: flex;
     flex-direction: row;
+    margin-right: 1em;
 }
 
 .outDesign {

@@ -1,3 +1,23 @@
 .customInputDesign {
-    
+    height: 3em;
+    width: 18em;
+
+    border: 0.2em solid #EF6B6B;
+    border-radius: 0.8em;
+    margin: 1.5em;
+    background-color: rgb(260, 260, 260);
+    color: black;
 }
+
+
+.customInputHeaderDesign {
+    height: 2em;
+    width: 10em;
+
+    border: 0.2em solid #EF6B6B;
+    border-radius: 0.5em;
+    margin: 0.6em;
+    background-color: rgb(260, 260, 260);
+    color: black;
+}
+
