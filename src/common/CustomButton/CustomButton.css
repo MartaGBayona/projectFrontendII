@@ -1,0 +1,33 @@
+.buttonDesign {
+    height: 3em;
+    width: 15em;
+
+    border-radius: 0.8em;
+
+    background-color: #EF6B6B;
+    color: white;
+    font-weight: bold;
+    border: 0.2em solid white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+
+    transition: 0.2s;
+}
+
+.buttonDesign:hover {
+
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: #ea4848;
+}
+
+.cButtonGreen {
+    background-color: green;
+}
+
+.cButtonGreen:hover {
+    background-color: darkgreen;
+}

@@ -1,4 +1,5 @@
 import { CustomInput } from "../../common/CustomInput/CustomInput"
+import { CustomButton } from "../../common/CustomButton/CustomButton"
 import { useState } from "react";
 import "./Login.css"
 import { useNavigate } from "react-router-dom";
@@ -62,7 +63,11 @@ export const Login = () => {
                 value={user.password || ""}
                 changeEmit={inputHandler}
             />
-            <button onClick={loginMe}>Login</button>
+                        <CustomButton
+                className={"buttonDesign"}
+                title={"Acceso"}
+                functionEmit={loginMe}
+            />
         </div>
     )
 }
