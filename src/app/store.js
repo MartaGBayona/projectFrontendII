@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import { encryptTransform } from 'redux-persist-transform-encrypt';
+//import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { thunk } from "redux-thunk";
 
 import storage from "redux-persist/lib/storage";
@@ -19,12 +19,12 @@ const persistConfig = {
     key: "root",
     storage,
     transforms: [
-        encryptTransform({
-            secretKey: 'saltamontes',
-            // eslint-disable-next-line no-unused-vars
-            onError: function (error) {
-            },
-        }),
+        // encryptTransform({
+        //     secretKey: 'saltamontes',
+        //     // eslint-disable-next-line no-unused-vars
+        //     onError: function (error) {
+        //     },
+        // }),
     ],
 };
 
