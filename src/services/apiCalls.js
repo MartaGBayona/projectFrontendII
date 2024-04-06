@@ -18,6 +18,10 @@ export const LoginUser = async (user) => {
             throw new Error(data.message);
         }
 
+        // if(data.message === "Token Error"){
+        //     dispatch(logout({ credentials: "" }))
+        //   }
+
         return data;
     } catch (error) {
         return error;
