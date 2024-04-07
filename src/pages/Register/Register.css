@@ -2,10 +2,22 @@
     height: 94vh;
     width: 100vw;
 
-    background-color: #EF6B6B;
+    background-color: gray;
     
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.contentDesign {
+    font-family: "Josefin Sans", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+    background-color: rgba(239, 107, 107, 0.5);
+
 }

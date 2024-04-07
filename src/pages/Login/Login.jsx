@@ -39,7 +39,7 @@ export const Login = () => {
                 user: decoded,
             };
 
-            dispatch(login({credentials: passport}));
+            dispatch(login({ credentials: passport }));
 
             setTimeout(() => {
                 navigate("/")
@@ -49,25 +49,28 @@ export const Login = () => {
 
     return (
         <div className="loginDesign">
-            <CustomInput
-                className="customInputDesign"
-                type="email"
-                name="email"
-                value={user.email || ""}
-                changeEmit={inputHandler}
-            />
-            <CustomInput
-                className="customInputDesign"
-                type="password"
-                name="password"
-                value={user.password || ""}
-                changeEmit={inputHandler}
-            />
-                        <CustomButton
-                className={"buttonDesign"}
-                title={"Acceso"}
-                functionEmit={loginMe}
-            />
+            <div className="contentDesign">
+                <CustomInput
+                    className="customInputDesign"
+                    type="email"
+                    name="email"
+                    value={user.email || ""}
+                    changeEmit={inputHandler}
+                />
+                <CustomInput
+                    className="customInputDesign"
+                    type="password"
+                    name="password"
+                    value={user.password || ""}
+                    changeEmit={inputHandler}
+                />
+                <CustomButton
+                    className={"buttonDesign"}
+                    title={"Acceso"}
+                    functionEmit={loginMe}
+                />
+            </div>
         </div>
+
     )
 }
