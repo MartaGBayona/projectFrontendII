@@ -1,23 +1,27 @@
-import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { CustomButton } from "../../common/CustomButton/CustomButton";
-import { useState } from "react";
-import "./Register.css";
-import { useNavigate } from "react-router-dom";
-import { RegisterUser } from "../../services/apiCalls";
-import { userData } from "../../app/slices/userSlice";
-import { registerRequest, registerSuccess, registerFailure } from "../../app/slices/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import "./Register.css"
+import { useState } from "react"
+import { CustomInput } from "../../common/CustomInput/CustomInput"
+import { CustomButton } from "../../common/CustomButton/CustomButton"
+import { RegisterUser } from "../../services/apiCalls"
+import { useNavigate } from "react-router-dom"
+import { validate } from "../../utils/funtions"
 
 export const Register = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { isLoading, error } = useSelector(userData);
 
     const [user, setUser] = useState({
         name: "",
         email: "",
         password: "",
     });
+
+    const [userError, setUserError] = useState({
+        nameError: "",
+        emailError: "",
+        passwordError: "",
+    });
+
+    const [msgError, setMsgError] = useState("");
 
     const inputHandler = (e) => {
         setUser((prevState) => ({
@@ -26,63 +30,83 @@ export const Register = () => {
         }));
     };
 
+    const checkError = (e) => {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+        const error = validate(fieldName, fieldValue);
+    
+        setUserError((prevState) => ({
+            ...prevState,
+            [`${fieldName}Error`]: error
+        }));
+    };
+
     const registerMe = async () => {
         try {
-            dispatch(registerRequest());
-
             for (let element in user) {
                 if (user[element] === "") {
-                    throw new Error("Todos los campos deben ser completados");
+                    throw new Error("Todos los campos deben ser completados")
                 }
             }
 
             const fetched = await RegisterUser(user);
-            
-            if (fetched.success) {
-                dispatch(registerSuccess(fetched.data));
-                setTimeout(() => {
-                    navigate("/");
-                }, 1200);
-            } else {
-                throw new Error(fetched.message || "Error registering user");
-            }
+            setMsgError(fetched.message)
+            setTimeout(() => {
+                navigate("/")
+            }, 1200);
         } catch (error) {
-            dispatch(registerFailure(error.message));
+            setMsgError(error.message)
         }
     };
 
     return (
+        <>
         <div className="registerDesign">
-            <div className="contentDesign">
-                <CustomInput
-                    className={`customInputDesign ${error ? "inputDesignError" : ""}`}
-                    type="text"
-                    name="name"
-                    value={user.name || ""}
-                    changeEmit={inputHandler}
-                />
-                <CustomInput
-                    className={`customInputDesign ${error ? "inputDesignError" : ""}`}
-                    type="email"
-                    name="email"
-                    value={user.email || ""}
-                    changeEmit={inputHandler}
-                />
-                <CustomInput
-                    className={`customInputDesign ${error ? "inputDesignError" : ""}`}
-                    type="password"
-                    name="password"
-                    value={user.password || ""}
-                    changeEmit={inputHandler}
-                />
-                <CustomButton
-                    className={"buttonDesign"}
-                    title={"Registro"}
-                    functionEmit={registerMe}
-                />
-                {isLoading && <p>Cargando...</p>}
-                {error && <div className="error">{error}</div>}
-            </div>
+        <div className="titleDesign">
+                    Regístrate
+                </div>
+            <CustomInput
+                className={`inputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
+                type={"text"}
+                placeholder={"nombre"}
+                name={"name"}
+                value={user.name || ""}
+                changeEmit={(e) => inputHandler(e)}
+                onBlurFunction={(e) => checkError(e)}
+            />
+            <div className="error">{userError.firstNameError}</div>
+
+            <div className="error">{userError.secondNameError}</div>
+
+            <CustomInput
+                className={`inputDesign ${userError.emailError ? "inputDesignError" : ""}`}
+                type={"email"}
+                placeholder={"email"}
+                name={"email"}
+                value={user.email || ""}
+                changeEmit={(e) => inputHandler(e)}
+                onBlurFunction={(e) => checkError(e)}
+            />
+            <div className="error">{userError.emailError}</div>
+
+            <CustomInput
+                className={`inputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
+                type={"password"}
+                placeholder={"contraseña"}
+                name={"password"}
+                value={user.password || ""}
+                changeEmit={(e) => inputHandler(e)}
+                onBlurFunction={(e) => checkError(e)}
+            />
+            <div className="error">{userError.passwordError}</div>
+
+            <CustomButton
+                className={"buttonDesign"}
+                title={"Registro"}
+                functionEmit={registerMe}
+            />
+            <div className="error">{msgError}</div>
         </div>
-    );
-};
+    </>
+    )
+}

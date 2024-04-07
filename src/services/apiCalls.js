@@ -12,21 +12,23 @@ export const LoginUser = async (user) => {
     try {
         const response = await fetch(`${root}auth/login`, options);
 
+        if (!response.ok) {
+            throw new Error('Error en la solicitud al servidor');
+        }
+
         const data = await response.json();
 
         if (!data.success) {
-            throw new Error(data.message);
+            throw new Error(data.message || 'Error en la respuesta del servidor');
         }
-
-        // if(data.message === "Token Error"){
-        //     dispatch(logout({ credentials: "" }))
-        //   }
 
         return data;
     } catch (error) {
-        return error;
+        console.error('Error en la función LoginUser:', error);
+        throw error;
     }
 };
+
 
 export const RegisterUser = async (user) => {
     const options = {
@@ -52,33 +54,40 @@ export const RegisterUser = async (user) => {
     }
 };
 
-export const GetProfile = async (token) => {
+export const GetProfile = async (credentials) => {
     const options = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+            "Authorization": `Bearer ${credentials.token}`
+        },
     };
+
     try {
         const response = await fetch(`${root}users/profile`, options);
         const data = await response.json();
 
-        if (!data.success) {
-            throw new Error(data.message);
+        if (response.status !== 200 || !data.success) {
+            throw new Error(data.message || 'Error en la solicitud al servidor');
         }
+
+
         return data;
     } catch (error) {
-        return error;
+        console.error('Error al obtener el perfil:', error);
+        throw error;
     }
 };
 
-export const UpdateProfile = async (token, data) => {
+
+
+
+export const UpdateProfile = async (credentials, data) => {
     const options = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${credentials.token}`
         },
         body: JSON.stringify(data)
     };

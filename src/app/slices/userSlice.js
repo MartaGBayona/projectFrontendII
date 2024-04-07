@@ -19,28 +19,10 @@ export const userSlice = createSlice({
                 ...action.payload
             };
         },
-        registerRequest: (state, action) => {
-            return {
-                ...state,
-                ...action.payload
-            };
-        },
-        registerSuccess: (state, action) => {
-            return {
-                ...state,
-                ...action.payload
-            };
-        },
-        registerFailure: (state, action) => {
-            return {
-                ...state,
-                ...action.payload
-            };
-        },
     }
 });
 
-export const { login, logout, registerRequest, registerSuccess, registerFailure } = userSlice.actions;
+export const { login, logout} = userSlice.actions;
 
 export const userData = (state) => state.user;
 

@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { GetProfile, UpdateProfile } from "../../services/apiCalls";
 import { CustomButton } from "../../common/CustomButton/CustomButton";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import "./Profile.css"
+import "./Profile.css";
+import { useSelector } from "react-redux";
 import { validate } from "../../utils/funtions";
+import { userData } from "../../app/slices/userSlice";
 
 export const Profile = () => {
     const navigate = useNavigate();
-    const dataUser = JSON.parse(localStorage.getItem("passport"));
+
+    const rdxUser = useSelector(userData);
 
     const [write, setWrite] = useState("disabled");
-    // eslint-disable-next-line no-unused-vars
-    const [tokenStorage, setTokenStorage] = useState(dataUser?.token);
     const [loadedData, setLoadedData] = useState(false);
     const [user, setUser] = useState({
         name: "",
@@ -23,6 +24,38 @@ export const Profile = () => {
         nameError: "",
         emailError: "",
     });
+
+    const getUserProfile = async (credentials) => {
+        try {
+            const fetched = await GetProfile(credentials);
+    
+            if (!fetched.success) {
+                throw new Error(fetched.message || 'Error en la respuesta del servidor');
+            }
+    
+            setUser({
+                name: fetched.data.name,
+                email: fetched.data.email,
+            });
+            setLoadedData(true);
+        } catch (error) {
+            console.error('Error al obtener el perfil:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        if (!rdxUser.credentials.token) {
+            navigate("/");
+        } 
+        
+    }, [rdxUser.credentials, loadedData, navigate]);
+
+    useEffect(() => {
+        if(!loadedData) {
+            getUserProfile(rdxUser.credentials);
+        }
+    },[loadedData])
 
     const inputHandler = (e) => {
         setUser((prevState) => ({
@@ -36,40 +69,12 @@ export const Profile = () => {
         setUserError((prevState) => ({
             ...prevState,
             [e.target.name + "Error"]: error
-        }))
-    }
-
-    useEffect(() => {
-        if (!tokenStorage) {
-            navigate("/")
-        }
-    }, [tokenStorage, navigate])
-
-    useEffect(() => {
-        const getUserProfile = async () => {
-            try {
-                const fetched = await GetProfile(tokenStorage);
-
-                setLoadedData(true);
-
-                setUser({
-                    name: fetched.data.name,
-                    email: fetched.data.email,
-                });
-            } catch (error) {
-                return(error)
-            }
-        };
-
-        if (!loadedData) {
-            getUserProfile();
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
+        }));
+    };
 
     const updateData = async () => {
         try {
-            const fetched = await UpdateProfile(tokenStorage, user);
+            const fetched = await UpdateProfile(rdxUser.credentials.token);
 
             setUser((prevState) => ({
                 ...prevState,
@@ -79,46 +84,37 @@ export const Profile = () => {
 
             setWrite("disabled");
         } catch (error) {
-            return(error);
+            console.error('Error al actualizar el perfil:', error);
+            throw error;
         }
     };
-
-    useEffect(() => {
-        if (!tokenStorage) {
-            navigate("/")
-        }
-    }, [tokenStorage, navigate])
 
     return (
         <>
             <div className="profileDesign">
-                {!loadedData ? (
-                    <div>CARGANDO</div>
-                ) : (
+                {loadedData ? (
                     <div className="profileDesign">
-                    <div className="titleDesign">
-                    Bienvenido a tu Perfil
-                </div>
+                        <div className="titleDesign">
+                            Bienvenido a tu Perfil
+                        </div>
                         <CustomInput
-                            className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""
-                                }`}
+                            className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
                             type={"text"}
                             placeholder={""}
                             name={"name"}
                             disabled={write}
-                            value={user.name|| ""}
-                            onChangeFunction={(e) => inputHandler(e)}
+                            value={user.name || ""}
+                            changeEmit={(e) => inputHandler(e)}
                             onBlurFunction={(e) => checkError(e)}
                         />
                         <CustomInput
-                            className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""
-                                }`}
+                            className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
                             type={"email"}
                             placeholder={""}
                             name={"email"}
                             disabled={"disabled"}
                             value={user.email || ""}
-                            onChangeFunction={(e) => inputHandler(e)}
+                            changeEmit={(e) => inputHandler(e)}
                             onBlurFunction={(e) => checkError(e)}
                         />
                         <CustomButton
@@ -127,8 +123,11 @@ export const Profile = () => {
                             functionEmit={write === "" ? updateData : () => setWrite("")}
                         />
                     </div>
+                ) : (
+                    <div>CARGANDO</div>
                 )}
             </div>
         </>
     );
-}
+};
+
