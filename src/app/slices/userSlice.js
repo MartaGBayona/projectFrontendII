@@ -4,8 +4,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
         credentials: {},
-        isLoading: false,
-        error: null,
+
     },
     reducers: {
         login: (state, action) => {
@@ -20,25 +19,22 @@ export const userSlice = createSlice({
                 ...action.payload
             };
         },
-        registerRequest: (state) => {
+        registerRequest: (state, action) => {
             return {
                 ...state,
-                isLoading: true,
-                error: null,
+                ...action.payload
             };
         },
         registerSuccess: (state, action) => {
             return {
                 ...state,
-                credentials: action.payload,
-                isLoading: false,
+                ...action.payload
             };
         },
         registerFailure: (state, action) => {
             return {
                 ...state,
-                isLoading: false,
-                error: action.payload,
+                ...action.payload
             };
         },
     }

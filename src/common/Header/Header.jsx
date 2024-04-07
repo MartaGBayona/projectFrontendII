@@ -29,7 +29,7 @@ export const Header = () => {
         }, 375);
 
         return () => clearTimeout(searching);
-    });
+    }, [criteria, dispatch]);
 
     return (
         <div className="headerDesign">
