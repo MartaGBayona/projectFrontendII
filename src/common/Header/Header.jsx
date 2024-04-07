@@ -12,6 +12,7 @@ export const Header = () => {
     const rdxUser = useSelector(userData);
 
     const dispatch = useDispatch();
+    //const [profileName, setProfileName] = useState("")
 
     useEffect(() => {
         console.log(rdxUser, " credentials passport");
@@ -42,7 +43,8 @@ export const Header = () => {
             <CustomLink path="/" title="Home" />
             {rdxUser?.credentials?.token ? (
                 <div className="navigatorDesign">
-                    <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} />
+                    <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} /> 
+                    
                     <div
                         className="outDesign"
                         onClick={() => dispatch(logout({ credentials: "" }))}

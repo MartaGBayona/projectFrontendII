@@ -94,7 +94,9 @@ export const UpdateProfile = async (credentials, data) => {
 
     try {
         const response = await fetch(`${root}users/profile`, options);
+        console.log(response)
         const data = await response.json();
+        console.log(data)
 
         if(!data.success) {
             throw new Error(data.message)

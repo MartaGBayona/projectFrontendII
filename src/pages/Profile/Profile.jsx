@@ -7,11 +7,15 @@ import "./Profile.css";
 import { useSelector } from "react-redux";
 import { validate } from "../../utils/funtions";
 import { userData } from "../../app/slices/userSlice";
+import { useDispatch } from "react-redux"
+import { updated } from "../../app/slices/userSlice";
 
 export const Profile = () => {
     const navigate = useNavigate();
 
     const rdxUser = useSelector(userData);
+
+    const dispatch = useDispatch();
 
     const [write, setWrite] = useState("disabled");
     const [loadedData, setLoadedData] = useState(false);
@@ -55,7 +59,7 @@ export const Profile = () => {
         if(!loadedData) {
             getUserProfile(rdxUser.credentials);
         }
-    },[loadedData])
+    },[rdxUser.credentials, loadedData])
 
     const inputHandler = (e) => {
         setUser((prevState) => ({
@@ -74,13 +78,16 @@ export const Profile = () => {
 
     const updateData = async () => {
         try {
-            const fetched = await UpdateProfile(rdxUser.credentials.token);
+            console.log(rdxUser.credentials)
+            const fetched = await UpdateProfile(rdxUser.credentials, user);
 
             setUser((prevState) => ({
                 ...prevState,
                 name: fetched.data.name || prevState.name,
                 email: fetched.data.email || prevState.email,
             }));
+
+            dispatch(updated({ credentials : {...rdxUser.credentials, user : {...rdxUser.credentials.user, name : user.name}}}))
 
             setWrite("disabled");
         } catch (error) {

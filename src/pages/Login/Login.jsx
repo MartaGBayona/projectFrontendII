@@ -40,7 +40,7 @@ export const Login = () => {
             };
 
             dispatch(login({ credentials: passport }));
-
+            
             setTimeout(() => {
                 navigate("/")
             }, 500)
