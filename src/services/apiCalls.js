@@ -135,3 +135,32 @@ export const GetPosts = async (credentials) => {
     }
 }
 
+
+export const GetOwnPosts = async (credentials) => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${credentials.token}`
+        },
+        
+    };
+
+    try {
+        const response = await fetch(`${root}posts/own`, options);
+
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message);
+        }
+
+        const servicesData = data.data;
+
+        return servicesData;
+    } catch (error) {
+        return error;
+    }
+}
+
+

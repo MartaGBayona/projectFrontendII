@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { GetProfile, UpdateProfile } from "../../services/apiCalls";
+import { GetProfile, UpdateProfile, GetOwnPosts } from "../../services/apiCalls";
 import { CustomButton } from "../../common/CustomButton/CustomButton";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { Card } from "../../common/Card/Card";
 import "./Profile.css";
 import { useSelector } from "react-redux";
 import { validate } from "../../utils/funtions";
@@ -14,7 +15,6 @@ export const Profile = () => {
     const navigate = useNavigate();
 
     const rdxUser = useSelector(userData);
-
     const dispatch = useDispatch();
 
     const [write, setWrite] = useState("disabled");
@@ -23,20 +23,18 @@ export const Profile = () => {
         name: "",
         email: "",
     });
-
     const [userError, setUserError] = useState({
         nameError: "",
         emailError: "",
     });
+    const [userPosts, setUserPosts] = useState([]);
 
     const getUserProfile = async (credentials) => {
         try {
             const fetched = await GetProfile(credentials);
-    
             if (!fetched.success) {
                 throw new Error(fetched.message || 'Error en la respuesta del servidor');
             }
-    
             setUser({
                 name: fetched.data.name,
                 email: fetched.data.email,
@@ -48,18 +46,36 @@ export const Profile = () => {
         }
     };
 
+    const getUserPosts = async (credentials) => {
+        try {
+            const fetched = await GetOwnPosts(credentials);
+            if (!fetched.success) {
+                throw new Error(fetched.message || 'Error en la respuesta del servidor');
+            }
+            setUserPosts(fetched.data);
+        } catch (error) {
+            console.error('Error al obtener los posts del usuario:', error);
+            throw error;
+        }
+    };
+
     useEffect(() => {
         if (!rdxUser.credentials.token) {
             navigate("/");
         } 
-        
-    }, [rdxUser.credentials, loadedData, navigate]);
+    }, [rdxUser.credentials, navigate]);
 
     useEffect(() => {
-        if(!loadedData) {
+        if (!loadedData) {
             getUserProfile(rdxUser.credentials);
         }
-    },[rdxUser.credentials, loadedData])
+    }, [rdxUser.credentials, loadedData]);
+
+    useEffect(() => {
+        if (rdxUser.credentials.token) {
+            getUserPosts({ token: rdxUser.credentials.token });
+        }
+    }, [rdxUser]);
 
     const inputHandler = (e) => {
         setUser((prevState) => ({
@@ -78,17 +94,13 @@ export const Profile = () => {
 
     const updateData = async () => {
         try {
-            console.log(rdxUser.credentials)
             const fetched = await UpdateProfile(rdxUser.credentials, user);
-
             setUser((prevState) => ({
                 ...prevState,
                 name: fetched.data.name || prevState.name,
                 email: fetched.data.email || prevState.email,
             }));
-
-            dispatch(updated({ credentials : {...rdxUser.credentials, user : {...rdxUser.credentials.user, name : user.name}}}))
-
+            dispatch(updated({ credentials: { ...rdxUser.credentials, user: { ...rdxUser.credentials.user, name: user.name } } }));
             setWrite("disabled");
         } catch (error) {
             console.error('Error al actualizar el perfil:', error);
@@ -101,9 +113,7 @@ export const Profile = () => {
             <div className="profileDesign">
                 {loadedData ? (
                     <div className="profileDesign">
-                        <div className="titleDesign">
-                            Perfil de usuario
-                        </div>
+                        <div className="titleDesign">Perfil de usuario</div>
                         <CustomInput
                             className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
                             type={"text"}
@@ -129,6 +139,19 @@ export const Profile = () => {
                             title={write === "" ? "Confirmar" : "Editar"}
                             functionEmit={write === "" ? updateData : () => setWrite("")}
                         />
+                        <div className="userPostsSection">
+                            <div>Tus Posts</div>
+                            <div className="cardsRoster">
+                                {userPosts.map(post => (
+                                    <Card
+                                        key={post._id}
+                                        userName={post.user.name}
+                                        title={post.title}
+                                        description={post.description}
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div>CARGANDO</div>
@@ -137,4 +160,5 @@ export const Profile = () => {
         </>
     );
 };
+
 
