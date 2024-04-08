@@ -38,6 +38,10 @@
     animation: fadeIn 2s forwards;
 }
 
+.subtitleDesign{
+    color: rgb(69, 238, 162);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
