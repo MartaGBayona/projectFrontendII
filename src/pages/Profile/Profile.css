@@ -2,11 +2,14 @@
     height: 100vh;
     width: 100vw;
 
-    background-color: grey;
+    background-image:url(../../../img/posts.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     background-size: cover; 

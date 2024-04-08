@@ -2,12 +2,17 @@
     min-height: 94vh;
     width: 100vw;
 
-    background-color: rgb(222, 55, 55);
+    background-image:url(../../../img/posts.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
     
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
+
 }
 
 .cardsServiceRoster {
@@ -18,10 +23,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    text-align: left;
     margin-top: 3%;
+
 }
 
 .postTitle {
+    font-size: 1.5em;
+}
+
+.postNameDesign {
+    font-family: 'New System', sans-serif;
+    color: rgb(69, 238, 162);
     font-size: 1.5em;
 }

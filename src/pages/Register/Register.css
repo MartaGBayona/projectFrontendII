@@ -1,23 +1,31 @@
 .registerDesign {
-    height: 94vh;
+    min-height: 100vh;
     width: 100vw;
 
-    background-color: gray;
+    background-image:url(../../../img/home.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
     
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.contentDesign {
-    font-family: "Josefin Sans", sans-serif;
+.contentDesignRegister {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     padding: 5em;
-    background-color: rgba(239, 107, 107, 0.5);
+    background-color: rgb(46, 46, 46, 0.7); 
 
+}
+
+.titleDesignRegister {
+    font-family: 'New System', sans-serif;
+    font-size: 5em;
+    color: rgb(69, 238, 162);
 }

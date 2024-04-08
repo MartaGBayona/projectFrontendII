@@ -3,12 +3,18 @@
     height:4vh;
     width: 100vw;
 
-    background-color: rgb(260, 260, 260);
+    background-color: rgb(46, 46, 46);
+    
 
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
+
+
+    transition: 0.3s;
+    font-family: 'New System', sans-serif;
+    overflow-x: hidden;
 
     position: fixed;
     top: 0;
@@ -16,14 +22,10 @@
     z-index: 1000;
     transition: 0.3s;
     overflow-x: hidden;
+    padding: 0.5em 1em;
 
 }
 
-.headerScroll {
-    transition: 0.3s;
-    opacity: 0;
-    color: rgb(220, 160, 80);
-}
 
 .navigatorDesign {
     display: flex;
@@ -31,16 +33,19 @@
 }
 
 .outDesign {
-    color: #EF6B6B;
+    color: rgb(69, 238, 162);
     font-weight: bold;
+    font-size: 1.2em;
 
-    margin: 1em;
+    margin: 0.5em;
+    margin-left: 0.5em;
+    
 
-    transition: 0.3s;
+    transition: 0.2s
 }
 
 .outDesign:hover {
-    transition: 0.3s;
-    color: #ea4848;
     cursor: pointer;
+    transition: 0.2s;
+    color: rgb(59, 198, 136);
 }

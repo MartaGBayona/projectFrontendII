@@ -1,12 +1,22 @@
 .homeDesign {
-    height: 94vh;
+    min-height: 100vh;
     width: 100vw;
+    background-image:url(../../../img/home.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
 
-    background-color: #EF6B6B;
-    
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: center; 
+    overflow-x: hidden;                                           
+}
+
+.titleDesign {
+    margin-top: 0.5em;
+    font-family: 'New System', sans-serif;
+    font-size: 10em;
+    color: rgb(69, 238, 162);
 }
 

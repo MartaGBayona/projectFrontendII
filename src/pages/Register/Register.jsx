@@ -34,7 +34,7 @@ export const Register = () => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
         const error = validate(fieldName, fieldValue);
-    
+
         setUserError((prevState) => ({
             ...prevState,
             [`${fieldName}Error`]: error
@@ -61,52 +61,55 @@ export const Register = () => {
 
     return (
         <>
-        <div className="registerDesign">
-        <div className="titleDesign">
-                    Regístrate
+            <div className="registerDesign">
+                <div className="contentDesignRegister">
+                    <div className="titleDesignRegister">
+                        Regístrate
+                    </div>
+                    <CustomInput
+                        className={`inputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
+                        type={"text"}
+                        placeholder={"nombre"}
+                        name={"name"}
+                        value={user.name || ""}
+                        changeEmit={(e) => inputHandler(e)}
+                        onBlurFunction={(e) => checkError(e)}
+                    />
+                    <div className="error">{userError.firstNameError}</div>
+
+                    <div className="error">{userError.secondNameError}</div>
+
+                    <CustomInput
+                        className={`inputDesign ${userError.emailError ? "inputDesignError" : ""}`}
+                        type={"email"}
+                        placeholder={"email"}
+                        name={"email"}
+                        value={user.email || ""}
+                        changeEmit={(e) => inputHandler(e)}
+                        onBlurFunction={(e) => checkError(e)}
+                    />
+                    <div className="error">{userError.emailError}</div>
+
+                    <CustomInput
+                        className={`inputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
+                        type={"password"}
+                        placeholder={"contraseña"}
+                        name={"password"}
+                        value={user.password || ""}
+                        changeEmit={(e) => inputHandler(e)}
+                        onBlurFunction={(e) => checkError(e)}
+                    />
+                    <div className="error">{userError.passwordError}</div>
+
+                    <CustomButton
+                        className={"buttonDesign"}
+                        title={"Registro"}
+                        functionEmit={registerMe}
+                    />
+                    <div className="error">{msgError}</div>
                 </div>
-            <CustomInput
-                className={`inputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
-                type={"text"}
-                placeholder={"nombre"}
-                name={"name"}
-                value={user.name || ""}
-                changeEmit={(e) => inputHandler(e)}
-                onBlurFunction={(e) => checkError(e)}
-            />
-            <div className="error">{userError.firstNameError}</div>
 
-            <div className="error">{userError.secondNameError}</div>
-
-            <CustomInput
-                className={`inputDesign ${userError.emailError ? "inputDesignError" : ""}`}
-                type={"email"}
-                placeholder={"email"}
-                name={"email"}
-                value={user.email || ""}
-                changeEmit={(e) => inputHandler(e)}
-                onBlurFunction={(e) => checkError(e)}
-            />
-            <div className="error">{userError.emailError}</div>
-
-            <CustomInput
-                className={`inputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
-                type={"password"}
-                placeholder={"contraseña"}
-                name={"password"}
-                value={user.password || ""}
-                changeEmit={(e) => inputHandler(e)}
-                onBlurFunction={(e) => checkError(e)}
-            />
-            <div className="error">{userError.passwordError}</div>
-
-            <CustomButton
-                className={"buttonDesign"}
-                title={"Registro"}
-                functionEmit={registerMe}
-            />
-            <div className="error">{msgError}</div>
-        </div>
-    </>
+            </div>
+        </>
     )
 }

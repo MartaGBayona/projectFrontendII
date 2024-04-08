@@ -1,17 +1,17 @@
 .cardDesign {
 
-    height: 20em;
+    min-height: 12em;
     width: 35em;
 
     background-color: rgb(49, 47, 47);
-    border: 0.2em solid rgb(220, 160, 80);
+    border: 0.3em solid rgb(69, 238, 162);
 
     transition: 0.5s;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-align: start;
 
     margin: 3em;
     padding: 1em;

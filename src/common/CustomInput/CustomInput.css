@@ -2,8 +2,8 @@
     height: 3em;
     width: 18em;
 
-    border: 0.2em solid #EF6B6B;
-    border-radius: 0.8em;
+    border: 0.3em solid rgb(69, 238, 162);
+    border-radius: 0.1em;
     margin: 1.5em;
     background-color: rgb(260, 260, 260);
     color: black;
@@ -14,8 +14,19 @@
     height: 2em;
     width: 10em;
 
-    border: 0.2em solid #EF6B6B;
-    border-radius: 0.5em;
+    border: 0.3em solid rgb(69, 238, 162);
+    border-radius: 0.1em;
+    margin: 0.6em;
+    background-color: rgb(260, 260, 260);
+    color: black;
+}
+
+.customInputHeaderDesign:hover {
+    height: 2em;
+    width: 10em;
+
+    border: 0.3em solid rgb(69, 238, 162);
+    border-radius: 0.1em;
     margin: 0.6em;
     background-color: rgb(260, 260, 260);
     color: black;

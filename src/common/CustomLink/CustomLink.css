@@ -1,8 +1,9 @@
 .customLinkDesign {
-    color: #EF6B6B;
+    color: rgb(69, 238, 162);
     font-weight: bold;
+    font-size: 1.2em;
 
-    margin: 1em;
+    margin: 0.5em;
 
     transition: 0.2s
 }
@@ -10,5 +11,5 @@
 .customLinkDesign:hover {
     cursor: pointer;
     transition: 0.2s;
-    color: #ea4848;
+    color: rgb(59, 198, 136);
 }

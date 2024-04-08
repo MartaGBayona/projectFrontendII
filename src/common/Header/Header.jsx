@@ -40,7 +40,7 @@ export const Header = () => {
                 value={criteria || ""}
                 changeEmit={searchHandler}
             />
-            <CustomLink path="/" title="Home" />
+            <CustomLink path="/" title="RetroLink" />
             {rdxUser?.credentials?.token ? (
                 <div className="navigatorDesign">
                     <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} /> 
@@ -49,13 +49,13 @@ export const Header = () => {
                         className="outDesign"
                         onClick={() => dispatch(logout({ credentials: "" }))}
                     >
-                        log out
+                        Cerrar Sesión
                     </div>
                 </div>
             ) : (
                 <div className="navigatorDesign">
-                    <CustomLink path="/login" title="Login" />
-                    <CustomLink path="/register" title="Register" />
+                    <CustomLink path="/login" title="Acceso" />
+                    <CustomLink path="/register" title="Registro" />
                 </div>
             )}
         </div>

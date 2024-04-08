@@ -34,7 +34,6 @@ export const Posts = () => {
         <>
                         <div className="postsDesign">
                 <div className="titleDesign">
-                    Nuestros Servicios
                 </div>
                 {posts.length > 0 ? (
                     <div className="cardsRoster">{
@@ -42,8 +41,8 @@ export const Posts = () => {
                             post => {
                                 return (
                                     <Card
-                                        key={post.id}
-                                        userName={post.user.name}
+                                        key={post._id}
+                                        userName={<span className="postNameDesign">{post.user.name}</span>}
                                         title={<span className="postTitle">{post.title}</span>}
                                         description={<span className="postDescription">{post.description}</span>}
                                         clickFunction={() => clickedPosts(post)}

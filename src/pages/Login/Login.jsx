@@ -49,7 +49,10 @@ export const Login = () => {
 
     return (
         <div className="loginDesign">
-            <div className="contentDesign">
+            <div className="contentDesignLogin">
+            <div className="titleDesignRegister">
+                    Acceso
+                </div>
                 <CustomInput
                     className="customInputDesign"
                     type="email"
