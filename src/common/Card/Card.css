@@ -1,0 +1,28 @@
+.cardDesign {
+
+    height: 20em;
+    width: 35em;
+
+    background-color: rgb(49, 47, 47);
+    border: 0.2em solid rgb(220, 160, 80);
+
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3em;
+    padding: 1em;
+
+    font-family: "Josefin Sans", sans-serif;
+
+}
+
+.cardDesign:hover{
+    transition: 0.5s;
+
+    cursor: pointer;
+    transform: scale(1.02);
+}

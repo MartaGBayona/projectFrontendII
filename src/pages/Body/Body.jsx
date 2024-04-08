@@ -1,19 +1,30 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
 import { Profile } from "../Profile/Profile";
 import { Register } from "../Register/Register";
-import { Posts } from "../Posts/Posts"
+import { Posts } from "../Posts/Posts";
+import { userData } from "../../app/slices/userSlice";
 
 export const Body = () => {
+    const rdxUser = useSelector(userData);
+
     return (
         <Routes>
             <Route path="*" element={<Navigate to={"/"} replace />} />
-            <Route path="/" element={<Home />} />
+            
+            <Route path="/" element={
+                rdxUser?.credentials?.token ? (
+                    <Posts />
+                ) : (
+                    <Home />
+                )
+            } />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element = {<Profile />}/>
-            <Route path="/posts" element = {<Posts />}/>
+            <Route path="/profile" element={<Profile />} />
         </Routes>
     );
 };

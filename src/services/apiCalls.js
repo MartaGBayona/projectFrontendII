@@ -108,17 +108,18 @@ export const UpdateProfile = async (credentials, data) => {
     }
 }; 
 
-export const GetPosts = async () => {
+export const GetPosts = async (credentials) => {
     const options = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${credentials.token}`
         },
         
     };
 
     try {
-        const response = await fetch(`${root}services`, options);
+        const response = await fetch(`${root}posts`, options);
 
         const data = await response.json();
 
