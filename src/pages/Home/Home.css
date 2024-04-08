@@ -15,8 +15,35 @@
 
 .titleDesign {
     margin-top: 0.5em;
-    font-family: 'New System', sans-serif;
+    /* font-family: 'New System', sans-serif; */
+    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
     font-size: 10em;
     color: rgb(69, 238, 162);
+
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
+}
+
+.descriptionHomeDesign {
+    width: 20em;
+    margin-top: 0.7em;
+    padding: 1em;
+    /* font-family: 'New System', sans-serif; */
+    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
+    font-size: 4em;
+    color: whitesmoke;
+    background-color: rgb(46, 46, 46, 0.9);
+
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 

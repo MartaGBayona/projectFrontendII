@@ -49,7 +49,7 @@ export const Header = () => {
                         className="outDesign"
                         onClick={() => dispatch(logout({ credentials: "" }))}
                     >
-                        Cerrar Sesión
+                        Cerrar Sesion
                     </div>
                 </div>
             ) : (

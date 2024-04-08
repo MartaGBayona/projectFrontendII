@@ -2,7 +2,7 @@
     min-height: 100vh;
     width: 100vw;
 
-    background-image:url(../../../img/login.png);
+    background-image:url(../../../img/background.png);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
@@ -22,10 +22,23 @@
     padding: 5em;
     background-color: rgb(46, 46, 46, 0.9); 
 
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
+
 }
 
 .titleDesignRegister {
     font-family: 'New System', sans-serif;
+    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
     font-size: 5em;
     color: rgb(69, 238, 162);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -64,7 +64,7 @@ export const Register = () => {
             <div className="registerDesign">
                 <div className="contentDesignRegister">
                     <div className="titleDesignRegister">
-                        Regístrate
+                        Registrate
                     </div>
                     <CustomInput
                         className={`inputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}

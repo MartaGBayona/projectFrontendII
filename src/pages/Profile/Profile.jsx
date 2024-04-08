@@ -102,7 +102,7 @@ export const Profile = () => {
                 {loadedData ? (
                     <div className="profileDesign">
                         <div className="titleDesign">
-                            Bienvenido a tu Perfil
+                            Perfil de usuario
                         </div>
                         <CustomInput
                             className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
