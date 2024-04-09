@@ -18,7 +18,7 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const [write, setWrite] = useState("disabled");
-    const [loadedData, setLoadedData] = useState(false);
+    const [loadedData, setLoadedData] = useState();
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -32,6 +32,7 @@ export const Profile = () => {
     const getUserProfile = async (credentials) => {
         try {
             const fetched = await GetProfile(credentials);
+            console.log(fetched);
             if (!fetched.success) {
                 throw new Error(fetched.message || 'Error en la respuesta del servidor');
             }
@@ -46,23 +47,28 @@ export const Profile = () => {
         }
     };
 
-    const getUserPosts = async (credentials) => {
-        try {
-            const fetched = await GetOwnPosts(credentials);
-            if (!fetched.success) {
-                throw new Error(fetched.message || 'Error en la respuesta del servidor');
+    useEffect(() => {
+        const getUserPosts = async (credentials) => {
+            try {
+                const fetched = await GetOwnPosts(credentials);
+                setUserPosts(fetched);
+                console.log("soy el fetch", fetched)
+            } catch (error) {
+                console.error('Error al obtener los posts del usuario:', error);
+                throw error;
             }
-            setUserPosts(fetched.data);
-        } catch (error) {
-            console.error('Error al obtener los posts del usuario:', error);
-            throw error;
+        };
+        if (rdxUser.credentials.token) {
+            getUserPosts({ token: rdxUser.credentials.token });
+            
         }
-    };
+    }, [rdxUser]);
+
 
     useEffect(() => {
         if (!rdxUser.credentials.token) {
             navigate("/");
-        } 
+        }
     }, [rdxUser.credentials, navigate]);
 
     useEffect(() => {
@@ -70,12 +76,6 @@ export const Profile = () => {
             getUserProfile(rdxUser.credentials);
         }
     }, [rdxUser.credentials, loadedData]);
-
-    useEffect(() => {
-        if (rdxUser.credentials.token) {
-            getUserPosts({ token: rdxUser.credentials.token });
-        }
-    }, [rdxUser]);
 
     const inputHandler = (e) => {
         setUser((prevState) => ({
@@ -115,45 +115,49 @@ export const Profile = () => {
                     <div className="profileDesign">
                         <div className="titleDesignProfile">Perfil de usuario</div>
                         <div className="contentDesignProfile">
-                        <CustomInput
-                            className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
-                            type={"text"}
-                            placeholder={""}
-                            name={"name"}
-                            disabled={write}
-                            value={user.name || ""}
-                            changeEmit={(e) => inputHandler(e)}
-                            onBlurFunction={(e) => checkError(e)}
-                        />
-                        <CustomInput
-                            className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
-                            type={"email"}
-                            placeholder={""}
-                            name={"email"}
-                            disabled={"disabled"}
-                            value={user.email || ""}
-                            changeEmit={(e) => inputHandler(e)}
-                            onBlurFunction={(e) => checkError(e)}
-                        />
-                        <CustomButton
-                            className={write === "" ? "buttonDesign" : "buttonDesign"}
-                            title={write === "" ? "Confirmar" : "Editar"}
-                            functionEmit={write === "" ? updateData : () => setWrite("")}
-                        />
+                            <CustomInput
+                                className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
+                                type={"text"}
+                                placeholder={""}
+                                name={"name"}
+                                disabled={write}
+                                value={user.name || ""}
+                                changeEmit={(e) => inputHandler(e)}
+                                onBlurFunction={(e) => checkError(e)}
+                            />
+                            <CustomInput
+                                className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
+                                type={"email"}
+                                placeholder={""}
+                                name={"email"}
+                                disabled={"disabled"}
+                                value={user.email || ""}
+                                changeEmit={(e) => inputHandler(e)}
+                                onBlurFunction={(e) => checkError(e)}
+                            />
+                            <CustomButton
+                                className={write === "" ? "buttonDesign" : "buttonDesign"}
+                                title={write === "" ? "Confirmar" : "Editar"}
+                                functionEmit={write === "" ? updateData : () => setWrite("")}
+                            />
                         </div>
-                        
+
                         <div className="userPostsSection">
                             <div>Tus Posts</div>
-                            <div className="cardsRoster">
-                                {userPosts.map(post => (
-                                    <Card
-                                        key={post._id}
-                                        userName={post.user.name}
-                                        title={post.title}
-                                        description={post.description}
-                                    />
-                                ))}
-                            </div>
+                            {userPosts.length > 0 ? (
+                                <div className="cardsRoster">
+                                    {userPosts.map(post => (
+                                        <Card
+                                            key={post._id}
+                                            userName={post.user.name}
+                                            title={post.title}
+                                            description={post.description}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div>No hay posts para mostrar.</div>
+                            )}
                         </div>
                     </div>
                 ) : (

@@ -65,13 +65,15 @@ export const GetProfile = async (credentials) => {
 
     try {
         const response = await fetch(`${root}users/profile`, options);
+        console.log("Respuesta:", response);
         const data = await response.json();
+        console.log("estoy aqui", data)
 
         if (response.status !== 200 || !data.success) {
             throw new Error(data.message || 'Error en la solicitud al servidor');
         }
 
-
+        console.log("soy el perfil", data)
         return data;
     } catch (error) {
         console.error('Error al obtener el perfil:', error);
