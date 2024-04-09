@@ -3,15 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { GetProfile, UpdateProfile, GetOwnPosts } from "../../services/apiCalls";
 import { CustomButton } from "../../common/CustomButton/CustomButton";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { Card } from "../../common/Card/Card";
+import { UserCard } from "../../common/Card/Card";
 import "./Profile.css";
 import { useSelector } from "react-redux";
 import { validate } from "../../utils/funtions";
 import { userData } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux"
 import { updated } from "../../app/slices/userSlice";
+import { DeletePost } from "../../services/apiCalls"
 
 export const Profile = () => {
+
+    // export const Profile = () => {
+
+    //     gate const navi= useNavigate();
+    //     const state = useSelector(userData);
+    //     const token = state.credentials.token || ({});
+    //     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
 
     const rdxUser = useSelector(userData);
@@ -108,6 +116,38 @@ export const Profile = () => {
         }
     };
 
+    const deletePost = async (postId) => {
+        console.log("soy el postId",postId)
+        try {
+            
+            if (postId === null || postId === undefined || postId === "") {
+                throw new Error("El ID del appointment es inválido");
+                
+            }
+            const pase = rdxUser.credentials
+            console.log("soy pase",pase)
+            console.log("soy result", result)
+            console.log("RESUUUULT",result)
+
+            const result = await DeletePost(pase.token, postId);
+            console.log("Resultado de DeletePost:", result);
+            console.log("POOOOST", postId)
+            // if (result.success) {
+
+            //     setLoadedData(true);
+            //     const updatedPosts = userPosts.filter(post => post._id !== postId);
+            // setUserPosts(updatedPosts);
+
+            // } else {
+            //     throw new Error(result.message || 'Error deleting appointment');
+            // }
+
+        } catch (error) {
+            return ("Error al eliminar la cita:", error);
+        }
+    };
+
+
     return (
         <>
             <div className="profileDesign">
@@ -147,13 +187,23 @@ export const Profile = () => {
                             {userPosts.length > 0 ? (
                                 <div className="cardsRoster">
                                     {userPosts.map(post => (
-                                        <Card
+                                        <UserCard
                                             key={post._id}
-                                            userName={post.user.name}
-                                            title={post.title}
-                                            description={post.description}
+                                            title={
+                                                <div className="postTitle">
+                                                    {post.title}
+                                                </div>
+                                            }
+                                            description={
+                                                <div className="postDescription">
+                                                    {post.description}
+                                                </div>
+                                            }
+                                            isDeletable={true}
+                                            onDelete={() => deletePost(post._id)}
                                         />
                                     ))}
+                                    
                                 </div>
                             ) : (
                                 <div>No hay posts para mostrar.</div>
@@ -165,6 +215,7 @@ export const Profile = () => {
                 )}
             </div>
         </>
+        
     );
 };
 

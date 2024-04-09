@@ -165,4 +165,32 @@ export const GetOwnPosts = async (credentials) => {
     }
 }
 
+export const DeletePost = async (credentials, data) => {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${credentials.token}`
+        },
+        body: JSON.stringify({"id":data})
+        
+    };
+
+    try {
+        const response = await fetch(`${root}posts`, options);
+        const responseData = await response.json();
+        console.log("soy el responseData",responseData);
+
+        if (!responseData.success) {
+            console.log("Error al eliminar el post:", responseData.message);
+            throw new Error(responseData.message);
+        }
+
+        return responseData;
+    } catch (error) {
+        throw new Error(`Error al eliminar el post: ${error.message}`);
+        //return error;
+    }
+};
+
 

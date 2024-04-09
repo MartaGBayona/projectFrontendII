@@ -27,3 +27,31 @@
     cursor: pointer;
     transform: scale(1.02);
 }
+
+.cardUserDesign{
+    min-height: 12em;
+    width: 35em;
+
+    background-color: rgb(49, 47, 47);
+    border: 0.3em solid rgb(69, 238, 162);
+
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+
+    margin: 3em;
+    padding: 1em;
+
+    font-family: "Josefin Sans", sans-serif;
+    color: aliceblue;
+}
+
+.cardUserDesign:hover{
+    transition: 0.5s;
+
+    cursor: pointer;
+    transform: scale(1.02);
+}
