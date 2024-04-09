@@ -127,9 +127,9 @@ export const GetPosts = async (credentials) => {
             throw new Error(data.message);
         }
 
-        const servicesData = data.data;
+        const postData = data.data;
 
-        return servicesData;
+        return postData;
     } catch (error) {
         return error;
     }
@@ -155,9 +155,9 @@ export const GetOwnPosts = async (credentials) => {
             throw new Error(data.message);
         }
 
-        const servicesData = data.data;
-
-        return servicesData;
+        const postData = data.data;
+        console.log(data)
+        return postData;
     } catch (error) {
         return error;
     }
