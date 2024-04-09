@@ -113,7 +113,8 @@ export const Profile = () => {
             <div className="profileDesign">
                 {loadedData ? (
                     <div className="profileDesign">
-                        <div className="titleDesign">Perfil de usuario</div>
+                        <div className="titleDesignProfile">Perfil de usuario</div>
+                        <div className="contentDesignProfile">
                         <CustomInput
                             className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
                             type={"text"}
@@ -139,6 +140,8 @@ export const Profile = () => {
                             title={write === "" ? "Confirmar" : "Editar"}
                             functionEmit={write === "" ? updateData : () => setWrite("")}
                         />
+                        </div>
+                        
                         <div className="userPostsSection">
                             <div>Tus Posts</div>
                             <div className="cardsRoster">

@@ -21,3 +21,27 @@
     height: 1em;
     color: red;
 }
+
+.titleDesignProfile {
+    margin-top: 0.5em;
+    /* font-family: 'New System', sans-serif; */
+    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
+    font-size: 7em;
+    color: rgb(69, 238, 162);
+
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
+}
+
+.contentDesignProfile{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5em;
+    margin-bottom: 2em;
+    background-color: rgb(46, 46, 46, 0.9);
+    
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
+}
