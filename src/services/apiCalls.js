@@ -159,12 +159,12 @@ export const GetOwnPosts = async (credentials) => {
     }
 }
 
-export const DeletePost = async (token, postId) => {
+export const DeletePost = async (credentials, postId) => {
     const options = {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${credentials}`
         },
     };
 
@@ -188,6 +188,30 @@ export const DeletePost = async (token, postId) => {
         throw error; 
     }
 };
+
+export const CreatePost = async (credentials, data) => {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${credentials}`
+        },
+        body: JSON.stringify(data)
+    };
+
+    try {
+        const response = await fetch(`${root}posts`, options);
+        const responseData = await response.json();
+
+        if (!responseData.success) {
+            throw new Error(responseData.message);
+        }
+
+        return responseData;
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+}
 
 
 

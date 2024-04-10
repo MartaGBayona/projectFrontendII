@@ -23,7 +23,7 @@
     background-color: rgb(46, 46, 46, 0.9);
     
     opacity: 0; 
-    animation: fadeIn 2s forwards;
+    animation: fadeIn 1.5s forwards;
 }
 
 .titleDesignLogin {

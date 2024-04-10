@@ -28,3 +28,25 @@ export const UserCard = ({ title, description, isDeletable, onDelete }) => {
         </div>
     );
 }
+
+
+export const PostCard = ({ title, description, handleInputChange, handleSubmit }) => {
+    return (
+        <div className="cardUserDesign">
+            <input 
+                type="text" 
+                placeholder="Título" 
+                value={title} 
+                onChange={(e) => handleInputChange("title", e.target.value)} 
+            />
+            <textarea 
+                placeholder="Descripción" 
+                value={description} 
+                onChange={(e) => handleInputChange("description", e.target.value)}
+            />
+            <button className="buttonDesign" onClick={handleSubmit}>
+                Crear Post
+            </button>
+        </div>
+    );
+}
