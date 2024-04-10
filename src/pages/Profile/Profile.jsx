@@ -36,6 +36,7 @@ export const Profile = () => {
         emailError: "",
     });
     const [userPosts, setUserPosts] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
     const getUserProfile = async (credentials) => {
         try {
@@ -129,7 +130,10 @@ export const Profile = () => {
     
             if (result.success) {
                 const updatedPosts = userPosts.filter(post => post._id !== postId);
+                console.log("userPosts antes de la actualización:", userPosts);
+                console.log("Posts actualizados:", updatedPosts);
                 setUserPosts(updatedPosts);
+                setRefresh(!refresh);
             } else {
                 throw new Error(result.message || 'Error deleting post');
             }
@@ -139,6 +143,10 @@ export const Profile = () => {
             return error; 
         }
     };
+
+    useEffect(() => {
+        console.log("userPosts ha cambiado:", userPosts);
+    }, [userPosts]);
     
 
 

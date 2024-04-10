@@ -185,7 +185,7 @@ export const DeletePost = async (token, postId) => {
         return responseData;
     } catch (error) {
         console.error("Error en la solicitud DELETE:", error);
-        throw error; // Lanza el error para que puedas manejarlo en otro lugar si es necesario
+        throw error; 
     }
 };
 
