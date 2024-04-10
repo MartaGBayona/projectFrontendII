@@ -14,12 +14,6 @@ import { DeletePost } from "../../services/apiCalls"
 
 export const Profile = () => {
 
-    // export const Profile = () => {
-
-    //     gate const navi= useNavigate();
-    //     const state = useSelector(userData);
-    //     const token = state.credentials.token || ({});
-    //     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
 
     const rdxUser = useSelector(userData);
@@ -36,7 +30,7 @@ export const Profile = () => {
         emailError: "",
     });
     const [userPosts, setUserPosts] = useState([]);
-    const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const getUserProfile = async (credentials) => {
         try {
@@ -115,32 +109,23 @@ export const Profile = () => {
         }
     };
 
-    const deletePost = async (postId) => {
+    const deletePostHandler = async (postId) => {
+        setLoading(true);
+
         try {
-            if (!postId) {
-                throw new Error("El ID del post es inválido");
-            }
-    
             const result = await DeletePost(rdxUser.credentials.token, postId);
-            console.log("Respuesta completa de DeletePost:", result);
-    
-            if (result && result.message) {
-                throw new Error(result.message);
-            }
-    
-            if (result.success) {
+
+            if (result && result.success) {
                 const updatedPosts = userPosts.filter(post => post._id !== postId);
-                console.log("userPosts antes de la actualización:", userPosts);
-                console.log("Posts actualizados:", updatedPosts);
                 setUserPosts(updatedPosts);
-                setRefresh(!refresh);
             } else {
                 throw new Error(result.message || 'Error deleting post');
             }
 
+            setLoading(false);
         } catch (error) {
-            
-            return error; 
+            console.error('Error deleting post:', error);
+            setLoading(false);
         }
     };
 
@@ -202,7 +187,7 @@ export const Profile = () => {
                                                 </div>
                                             }
                                             isDeletable={true}
-                                            onDelete={() => deletePost(post._id)}
+                                            onDelete={() => deletePostHandler(post._id)}
                                         />
                                     ))}
                                     
@@ -211,6 +196,7 @@ export const Profile = () => {
                                 <div>No hay posts para mostrar.</div>
                             )}
                         </div>
+                        {loading && <div className="loadingIndicator">Cargando...</div>}
                     </div>
                 ) : (
                     <div>CARGANDO</div>
