@@ -1,7 +1,7 @@
 .cardDesign {
 
-    min-height: 12em;
-    width: 35em;
+    min-height: 12vw;
+    width: 45vw;
 
     background-color: rgb(49, 47, 47);
     border: 0.3em solid rgb(69, 238, 162);
@@ -13,8 +13,8 @@
     justify-content: center;
     text-align: start;
 
-    margin: 3em;
-    padding: 1em;
+    margin: 3vw;
+    padding: 1vw;
 
     font-family: "Josefin Sans", sans-serif;
     color: aliceblue;
@@ -29,8 +29,8 @@
 }
 
 .cardUserDesign{
-    min-height: 12em;
-    width: 35em;
+    min-height: 12vw;
+    width: 45vw;
 
     background-color: rgb(49, 47, 47);
     border: 0.3em solid rgb(69, 238, 162);
@@ -42,8 +42,8 @@
     justify-content: center;
     text-align: start;
 
-    margin: 3em;
-    padding: 1em;
+    margin: 3vw;
+    padding: 1vw;
 
     font-family: "Josefin Sans", sans-serif;
     color: aliceblue;

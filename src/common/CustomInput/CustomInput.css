@@ -1,18 +1,19 @@
 .customInputDesign {
-    height: 3em;
-    width: 18em;
+    height: 3vw;
+    width: 18vw;
 
     border: 0.3em solid rgb(69, 238, 162);
     border-radius: 0.1em;
-    margin: 1.5em;
+    margin: 1.5vw;
     background-color: rgb(260, 260, 260);
     color: black;
+    font-size: 1vw;
 }
 
 
 .customInputHeaderDesign {
-    height: 2em;
-    width: 10em;
+    height: 2vw;
+    width: 10vw;
 
     border: 0.3em solid rgb(69, 238, 162);
     border-radius: 0.1em;
@@ -22,8 +23,8 @@
 }
 
 .customInputHeaderDesign:hover {
-    height: 2em;
-    width: 10em;
+    height: 2vw;
+    width: 10vw;
 
     border: 0.3em solid rgb(69, 238, 162);
     border-radius: 0.1em;

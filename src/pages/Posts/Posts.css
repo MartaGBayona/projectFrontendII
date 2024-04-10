@@ -29,7 +29,7 @@
 
 .titleDesignPost{
         font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
-        font-size: 7em;
+        font-size: 6vw;
         color: rgb(69, 238, 162);
         opacity: 0;
         animation: fadeIn 1.5s forwards;
@@ -37,7 +37,7 @@
 }
 
 .postTitle {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     padding-bottom: 0.5em;
     padding-top: 0.5em;
 }
@@ -45,7 +45,7 @@
 .postNameDesign {
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
     color: rgb(69, 238, 162);
-    font-size: 1.5em;
+    font-size: 1.5vw;
     padding-bottom: 0.5em;
     border-bottom: 0.1em dashed rgb(69, 238, 162);
 }

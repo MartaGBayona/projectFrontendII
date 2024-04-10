@@ -1,6 +1,6 @@
 .buttonDesign {
-    height: 3em;
-    width: 15em;
+    height: 2.5vw;
+    width: 14vw;
 
     font-family: 'New System', sans-serif;
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
@@ -10,11 +10,11 @@
     font-weight: bold;
     border: 0.2em solid black;
     border-radius: 0.1em;
-
+    font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1em;
+    margin: 1vw;
 
     transition: 0.2s;
 }

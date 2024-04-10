@@ -18,20 +18,17 @@ export const Posts = () => {
     const rdxUser = useSelector(userData);
 
     useEffect(() => {
-        if (posts.length === 0) {
-            const BringData = async () => {
-                try {
-                    const fetched = await GetPosts({ token: rdxUser.credentials.token });
-                    console.log("Fetched posts:", fetched);
-                    setPosts(fetched);
-                } catch (error) {
-                    console.log("Error fetching posts:", error);
-                    return error;
-                }
-            };
-            BringData();
-        }
-    }, [posts, rdxUser]);
+        const fetchPosts = async () => {
+            try {
+                const fetched = await GetPosts({ token: rdxUser.credentials.token });
+                setPosts(fetched);
+            } catch (error) {
+                console.log("Error fetching posts:", error);
+            }
+        };
+
+        fetchPosts();
+    }, [rdxUser]);
 
     const clickedPosts = (post) => {
         setSelectedPost(post);
@@ -75,13 +72,15 @@ export const Posts = () => {
             <div className="postsDesign">
                 <div className="titleDesignPost">Los temas del dia</div>
 
-                <PostCard 
-                    title={postData.title} 
-                    description={postData.description} 
-                    handleInputChange={handleInputChange}
-                    handleSubmit={handleSubmit}
-                />
-
+                {!selectedPost && (
+                    <PostCard 
+                        key="post"
+                        title={postData.title} 
+                        description={postData.description} 
+                        handleInputChange={handleInputChange}
+                        handleSubmit={handleSubmit}
+                    />
+                )}
                 {selectedPost ? (
                     <div className="selectedPost">
                         <h2>Información del Post</h2>

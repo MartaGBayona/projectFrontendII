@@ -19,7 +19,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 5em;
+    padding: 3vw;
     background-color: rgb(46, 46, 46, 0.9);
     
     opacity: 0; 
@@ -29,7 +29,7 @@
 .titleDesignLogin {
     font-family: 'New System', sans-serif;
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
-    font-size: 5em;
+    font-size: 5vw;
     color: rgb(69, 238, 162);
 }
 

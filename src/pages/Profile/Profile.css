@@ -29,7 +29,7 @@
 
 .titleDesignProfile {
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
-    font-size: 7em;
+    font-size: 6vw;
     color: rgb(69, 238, 162);
     opacity: 0;
     animation: fadeIn 1.5s forwards;
@@ -59,12 +59,11 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 2em;
+    padding: 2vw;
 }
 
 .userPostsSection {
-    width: 55%;
-    margin-right: 2em;
+    width: 70%;
 }
 
 .cardsRoster {
@@ -78,6 +77,10 @@
     animation: fadeIn 1.5s forwards;
 }
 
+.postDescription{
+    font-size: 1vw;
+}
+
 @keyframes fadeIn {
     to {
         opacity: 1;
@@ -87,6 +90,6 @@
 .subtitleDesign {
     font-family: 'New System', sans-serif;
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
-    font-size: 3em;
+    font-size: 3vw;
     color: rgb(69, 238, 162);
 }

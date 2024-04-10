@@ -1,13 +1,13 @@
 import "./Card.css";
 
-export const Card = ({ userName, title, description, clickFunction, userEmail, likes}) => {
+export const Card = ({key, userName, title, description, clickFunction, userEmail, likes}) => {
 
     const cardClicked = () => {
         clickFunction({ userName, userEmail, likes });
     };
 
     return (
-        <div className="cardDesign" onClick={cardClicked}>
+        <div key={key} className="cardDesign" onClick={cardClicked}>
             <div>{userName}</div>
             <div>{title}</div>
             <div>{description}</div>
@@ -30,9 +30,9 @@ export const UserCard = ({ title, description, isDeletable, onDelete }) => {
 }
 
 
-export const PostCard = ({ title, description, handleInputChange, handleSubmit }) => {
+export const PostCard = ({key, title, description, handleInputChange, handleSubmit }) => {
     return (
-        <div className="cardUserDesign">
+        <div key={key} className="cardUserDesign">
             <input 
                 type="text" 
                 placeholder="Título" 

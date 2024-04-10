@@ -1,7 +1,7 @@
 .headerDesign {
 
-    min-height:4vh;
-    width: 35vw;
+    min-height:1vw;
+    width: 50vw;
 
     background-color: rgb(46, 46, 46);
     
@@ -13,6 +13,7 @@
 
 
     transition: 0.3s;
+    font-size: 1vw;
     font-family: 'New System', sans-serif;
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
 
@@ -26,7 +27,7 @@
     margin-top: 1%;
     margin-bottom: 3%;
     transition: 0.3s;
-    padding: 1em;
+    padding: 0.5vw;
     opacity: 0.7;
 
     border: 0.3em solid rgb(69, 238, 162);
@@ -43,8 +44,7 @@
 .outDesign {
     color: rgb(69, 238, 162);
     font-weight: bold;
-    font-size: 1.2em;
-
+    font-size: 1.2vw;
     margin: 0.5em;
     margin-left: 0.5em;
     
