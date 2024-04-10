@@ -6,9 +6,9 @@
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
 
     background-color: rgb(69, 238, 162);
-    color: white;
+    color: black;
     font-weight: bold;
-    border: 0.2em solid white;
+    border: 0.2em solid black;
     border-radius: 0.1em;
 
     display: flex;
@@ -25,5 +25,7 @@
     transition: 0.2s;
     cursor: pointer;
     transition: 0.2s;
+    color: white;
+    border: 0.2em solid white;
     background-color: rgb(59, 198, 136);
 }
