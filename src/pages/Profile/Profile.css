@@ -8,13 +8,11 @@
     background-position: center;
 
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center;
+    padding-top: 3em;
+    
 }
 
 .error {
@@ -22,26 +20,73 @@
     color: red;
 }
 
+.pageHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .titleDesignProfile {
-    margin-top: 0.5em;
-    /* font-family: 'New System', sans-serif; */
     font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
     font-size: 7em;
     color: rgb(69, 238, 162);
-
-    opacity: 0; 
-    animation: fadeIn 2s forwards;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+    margin-top: 0.5em;
 }
 
-.contentDesignProfile{
+.pageContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5em;
+    
+}
+
+.userDataSection {
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 30%; 
+    animation: fadeIn 1.5s forwards;
+
+}
+
+.contentDesignProfile {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 5em;
-    margin-bottom: 2em;
-    background-color: rgb(46, 46, 46, 0.9);
-    
-    opacity: 0; 
-    animation: fadeIn 2s forwards;
+    padding: 2em;
+}
+
+.userPostsSection {
+    width: 55%;
+    margin-right: 2em;
+}
+
+.cardsRoster {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.subtitleDesign {
+    font-family: 'New System', sans-serif;
+    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
+    font-size: 3em;
+    color: rgb(69, 238, 162);
 }

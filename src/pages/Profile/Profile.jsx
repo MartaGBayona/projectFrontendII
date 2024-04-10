@@ -61,7 +61,7 @@ export const Profile = () => {
         };
         if (rdxUser.credentials.token) {
             getUserPosts({ token: rdxUser.credentials.token });
-            
+
         }
     }, [rdxUser]);
 
@@ -132,79 +132,76 @@ export const Profile = () => {
     useEffect(() => {
         console.log("userPosts ha cambiado:", userPosts);
     }, [userPosts]);
-    
 
 
     return (
         <>
             <div className="profileDesign">
                 {loadedData ? (
-                    <div className="profileDesign">
-                        <div className="titleDesignProfile">Perfil de usuario</div>
-                        <div className="contentDesignProfile">
-                            <CustomInput
-                                className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
-                                type={"text"}
-                                placeholder={""}
-                                name={"name"}
-                                disabled={write}
-                                value={user.name || ""}
-                                changeEmit={(e) => inputHandler(e)}
-                                onBlurFunction={(e) => checkError(e)}
-                            />
-                            <CustomInput
-                                className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
-                                type={"email"}
-                                placeholder={""}
-                                name={"email"}
-                                disabled={"disabled"}
-                                value={user.email || ""}
-                                changeEmit={(e) => inputHandler(e)}
-                                onBlurFunction={(e) => checkError(e)}
-                            />
-                            <CustomButton
-                                className={write === "" ? "buttonDesign" : "buttonDesign"}
-                                title={write === "" ? "Confirmar" : "Editar"}
-                                functionEmit={write === "" ? updateData : () => setWrite("")}
-                            />
+                    <>
+                        <div className="pageHeader">
+                            <div className="titleDesignProfile">Perfil de usuario</div>
                         </div>
-
-                        <div className="userPostsSection">
-                            <div>Tus Posts</div>
-                            {userPosts.length > 0 ? (
-                                <div className="cardsRoster">
-                                    {userPosts.map(post => (
-                                        <UserCard
-                                            key={post._id}
-                                            title={
-                                                <div className="postTitle">
-                                                    {post.title}
-                                                </div>
-                                            }
-                                            description={
-                                                <div className="postDescription">
-                                                    {post.description}
-                                                </div>
-                                            }
-                                            isDeletable={true}
-                                            onDelete={() => deletePostHandler(post._id)}
-                                        />
-                                    ))}
-                                    
+                        <div className="pageContent">
+                            <div className="userDataSection">
+                                <div className="contentDesignProfile">
+                                <div className="subtitleDesign">Mis Datos</div>
+                                    <CustomInput
+                                        className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
+                                        type={"text"}
+                                        placeholder={""}
+                                        name={"name"}
+                                        disabled={write}
+                                        value={user.name || ""}
+                                        changeEmit={(e) => inputHandler(e)}
+                                        onBlurFunction={(e) => checkError(e)}
+                                    />
+                                    <CustomInput
+                                        className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
+                                        type={"email"}
+                                        placeholder={""}
+                                        name={"email"}
+                                        disabled={"disabled"}
+                                        value={user.email || ""}
+                                        changeEmit={(e) => inputHandler(e)}
+                                        onBlurFunction={(e) => checkError(e)}
+                                    />
+                                    <CustomButton
+                                        className={write === "" ? "buttonDesign" : "buttonDesign"}
+                                        title={write === "" ? "Confirmar" : "Editar"}
+                                        functionEmit={write === "" ? updateData : () => setWrite("")}
+                                    />
                                 </div>
-                            ) : (
-                                <div>No hay posts para mostrar.</div>
-                            )}
+                            </div>
+                            <div className="userPostsSection">
+                                <div className="cardsRoster">
+                                <div className="subtitleDesign">Mis Posts</div>
+                                    {userPosts.length > 0 ? (
+                                        userPosts.map(post => (
+                                            <UserCard
+                                                key={post._id}
+                                                title={<div className="postTitle">{post.title}</div>}
+                                                description={<div className="postDescription">{post.description}</div>}
+                                                isDeletable={true}
+                                                onDelete={() => deletePostHandler(post._id)}
+                                            />
+                                        ))
+                                    ) : (
+                                        <div>No hay posts para mostrar.</div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                         {loading && <div className="loadingIndicator">Cargando...</div>}
-                    </div>
+                    </>
                 ) : (
                     <div>CARGANDO</div>
                 )}
             </div>
         </>
-        
     );
-};
+    
+}
+    
 
 
