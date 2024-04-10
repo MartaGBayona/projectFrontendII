@@ -40,7 +40,6 @@ export const Profile = () => {
     const getUserProfile = async (credentials) => {
         try {
             const fetched = await GetProfile(credentials);
-            console.log(fetched);
             if (!fetched.success) {
                 throw new Error(fetched.message || 'Error en la respuesta del servidor');
             }
@@ -60,7 +59,6 @@ export const Profile = () => {
             try {
                 const fetched = await GetOwnPosts(credentials);
                 setUserPosts(fetched);
-                console.log("soy el fetch", fetched)
             } catch (error) {
                 console.error('Error al obtener los posts del usuario:', error);
                 throw error;
@@ -117,35 +115,31 @@ export const Profile = () => {
     };
 
     const deletePost = async (postId) => {
-        console.log("soy el postId",postId)
         try {
-            
-            if (postId === null || postId === undefined || postId === "") {
-                throw new Error("El ID del appointment es inválido");
-                
+            if (!postId) {
+                throw new Error("El ID del post es inválido");
             }
-            const pase = rdxUser.credentials
-            console.log("soy pase",pase)
-            console.log("soy result", result)
-            console.log("RESUUUULT",result)
-
-            const result = await DeletePost(pase.token, postId);
-            console.log("Resultado de DeletePost:", result);
-            console.log("POOOOST", postId)
-            // if (result.success) {
-
-            //     setLoadedData(true);
-            //     const updatedPosts = userPosts.filter(post => post._id !== postId);
-            // setUserPosts(updatedPosts);
-
-            // } else {
-            //     throw new Error(result.message || 'Error deleting appointment');
-            // }
+    
+            const result = await DeletePost(rdxUser.credentials.token, postId);
+            console.log("Respuesta completa de DeletePost:", result);
+    
+            if (result && result.message) {
+                throw new Error(result.message);
+            }
+    
+            if (result.success) {
+                const updatedPosts = userPosts.filter(post => post._id !== postId);
+                setUserPosts(updatedPosts);
+            } else {
+                throw new Error(result.message || 'Error deleting post');
+            }
 
         } catch (error) {
-            return ("Error al eliminar la cita:", error);
+            
+            return error; 
         }
     };
+    
 
 
     return (

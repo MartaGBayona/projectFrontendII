@@ -65,15 +65,12 @@ export const GetProfile = async (credentials) => {
 
     try {
         const response = await fetch(`${root}users/profile`, options);
-        console.log("Respuesta:", response);
         const data = await response.json();
-        console.log("estoy aqui", data)
 
         if (response.status !== 200 || !data.success) {
             throw new Error(data.message || 'Error en la solicitud al servidor');
         }
 
-        console.log("soy el perfil", data)
         return data;
     } catch (error) {
         console.error('Error al obtener el perfil:', error);
@@ -96,9 +93,7 @@ export const UpdateProfile = async (credentials, data) => {
 
     try {
         const response = await fetch(`${root}users/profile`, options);
-        console.log(response)
         const data = await response.json();
-        console.log(data)
 
         if(!data.success) {
             throw new Error(data.message)
@@ -158,39 +153,41 @@ export const GetOwnPosts = async (credentials) => {
         }
 
         const postData = data.data;
-        console.log(data)
         return postData;
     } catch (error) {
         return error;
     }
 }
 
-export const DeletePost = async (credentials, data) => {
+export const DeletePost = async (token, postId) => {
     const options = {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${credentials.token}`
+            "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({"id":data})
-        
     };
 
     try {
-        const response = await fetch(`${root}posts`, options);
+        const response = await fetch(`${root}posts/${postId}`, options);
         const responseData = await response.json();
-        console.log("soy el responseData",responseData);
+
+        console.log("data de respuesta:", responseData);
+
+        if (!response.ok) {
+            throw new Error(responseData.message || 'Error en la solicitud DELETE');
+        }
 
         if (!responseData.success) {
-            console.log("Error al eliminar el post:", responseData.message);
-            throw new Error(responseData.message);
+            throw new Error(responseData.message || 'Error eliminando el post');
         }
 
         return responseData;
     } catch (error) {
-        throw new Error(`Error al eliminar el post: ${error.message}`);
-        //return error;
+        console.error("Error en la solicitud DELETE:", error);
+        throw error; // Lanza el error para que puedas manejarlo en otro lugar si es necesario
     }
 };
+
 
 
