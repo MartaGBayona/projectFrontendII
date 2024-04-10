@@ -33,7 +33,7 @@ export const Posts = () => {
     return (
         <>
             <div className="postsDesign">
-                <div className="titleDesign">Los temas del dia</div>
+                <div className="titleDesignPost">Los temas del dia</div>
                 {selectedPost ? (
                     <div className="selectedPost">
                         <h2>Información del Post</h2>

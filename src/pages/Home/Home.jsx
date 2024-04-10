@@ -10,7 +10,7 @@ export const Home = () => {
                 <div>
                     Descubre, juega y comparte tus experiencias con gamers de todo el mundo.
                 </div>
-                <div className="subtitleDesign">
+                <div className="subtitleDesignHome">
                     ¡Bienvenido a tu nuevo hogar gamer!
                 </div>
             </div>
