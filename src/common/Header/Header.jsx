@@ -43,8 +43,15 @@ export const Header = () => {
             <CustomLink path="/" title="RetroLink" />
             {rdxUser?.credentials?.token ? (
                 <div className="navigatorDesign">
-                    <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} /> 
-                    
+                    <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} />
+                    {rdxUser?.credentials?.user?.roleName === 'super_admin' ? (
+    <>
+        <CustomLink path="/users" title="Usuarios" />
+        <CustomLink path="/posts" title="Posts" />
+    </>
+) : (
+    <div>No tienes permisos para ver esta sección</div>
+)}
                     <div
                         className="outDesign"
                         onClick={() => dispatch(logout({ credentials: "" }))}
@@ -57,7 +64,8 @@ export const Header = () => {
                     <CustomLink path="/login" title="Acceso" />
                     <CustomLink path="/register" title="Registro" />
                 </div>
-            )}
+            )
+            }
         </div>
     )
 }

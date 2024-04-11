@@ -50,3 +50,18 @@ export const PostCard = ({ title, description, handleInputChange, handleSubmit }
         </div>
     );
 }
+
+export const UserAdminCard = ({ name, email, role, isDeletable, onDelete }) => {
+    return (
+        <div className="userCard">
+            <div className="userData">
+                <div className="userName">Nombre: {name}</div>
+                <div className="userEmail">Correo: {email}</div>
+                <div className="userRole">Rol: {role}</div>
+            </div>
+            {isDeletable && (
+                <button className="buttonDesign" onClick={onDelete}>Eliminar</button>
+            )}
+        </div>
+    );
+}

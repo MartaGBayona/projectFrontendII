@@ -1,0 +1,52 @@
+.userDesign {
+
+    height: 100vh;
+    width: 100vw;
+
+    background-color: rgb(30, 26, 29);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-image:url(../../../img/imgProyect/ImageDesignBody.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+
+    overflow-x: hidden;
+}
+
+.error {
+    height: 1em;
+    color: red;
+}
+
+.userFirstName {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: rgb(255, 255, 255);
+
+    line-height: 3;
+}
+
+.userSecondName {
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.userEmail {
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.cardsRosterAdmin{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: fadeIn 1.5s forwards;
+}

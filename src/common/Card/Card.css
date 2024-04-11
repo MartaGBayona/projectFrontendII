@@ -29,6 +29,26 @@
 }
 
 .cardUserDesign{
+    min-height: 12%;
+    width: 25%;
+
+    background-color: rgb(49, 47, 47);
+    border: 0.3em solid rgb(69, 238, 162);
+
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: start;
+
+    margin: 3vw;
+    padding: 1vw;
+
+    color: aliceblue;
+}
+
+.userCard{
     min-height: 12vw;
     width: 45vw;
 

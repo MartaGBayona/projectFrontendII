@@ -5,6 +5,7 @@ import { Login } from "../Login/Login";
 import { Profile } from "../Profile/Profile";
 import { Register } from "../Register/Register";
 import { Posts } from "../Posts/Posts";
+import { Users } from "../Users/Users";
 import { userData } from "../../app/slices/userSlice";
 
 export const Body = () => {
@@ -25,6 +26,7 @@ export const Body = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/users" element = {<Users />}/>
         </Routes>
     );
 };
