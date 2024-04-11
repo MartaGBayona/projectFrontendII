@@ -46,7 +46,7 @@ export const Users = () => {
                     Lista de Usuarios
                 </div>
                 {users.length > 0 ? (
-                    <div className="cardsRoster">
+                    <div className="cardsRosterAdmin">
                         {users.map(user => (
                             <UserAdminCard
                                 key={user._id}
