@@ -28,7 +28,6 @@
 }
 
 .titleDesignPost{font-family: 'New System', sans-serif;
-        /* font-family: 'Petyka - Retro Computer___SHORT', sans-serif; */
         font-size: 6vw;
         color: rgb(69, 238, 162);
         opacity: 0;
@@ -37,6 +36,7 @@
 }
 
 .postTitle {
+    font-family: "Roboto Mono", monospace;
     font-size: 1.5vw;
     padding-bottom: 0.5em;
     padding-top: 0.5em;
