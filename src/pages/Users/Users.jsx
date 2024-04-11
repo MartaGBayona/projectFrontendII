@@ -56,7 +56,7 @@ export const Users = () => {
                                 email={user.email}
                                 role={user.role}
                                 onDelete={() => handleDelete(user._id)}
-                                isDeletable={user.role !== "super_admin"} // Cambia el ID de superAdmin si es necesario
+                                isDeletable={user.role !== "super_admin"}
                             />
                         ))}
                     </div>
