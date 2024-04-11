@@ -41,26 +41,42 @@ export const Posts = () => {
         })
     }
 
-    const handleSubmit = async () => {
+    const createPost = async () => {
         setIsCreating(true);
-
+        console.log("Post Data:", postData);
+        
+        if (postData.title.length > 25 || postData.description.length > 300) {
+            console.error("Title or description is too long");
+            setIsCreating(false);
+            return;
+        }
+    
         try {
             const newPostData = {
                 title: postData.title,
                 description: postData.description,
                 userId: rdxUser.credentials.userId
             }
-            const createdPost = await CreatePost(rdxUser.credentials.token, newPostData);
-            console.log("New post created:", createdPost);
-            
-            setPosts(prevPosts => [createdPost, ...prevPosts]);
-
-            setPostData({
-                title: "",
-                description: ""
-            });
-
-            setIsCreating(false);
+            const response = await CreatePost(rdxUser.credentials.token, newPostData);
+            if (response.success) {
+                const createdPost = {
+                    ...response.data,
+                    user: response.user
+                };
+                console.log("New post created:", createdPost);
+                
+                setPosts(prevPosts => [createdPost, ...prevPosts]);
+    
+                setPostData({
+                    title: "",
+                    description: ""
+                });
+    
+                setIsCreating(false);
+            } else {
+                console.error("Error creating new post:", response.message);
+                setIsCreating(false);
+            }
         } catch (error) {
             console.error("Error creating new post:", error);
             setIsCreating(false);
@@ -74,11 +90,10 @@ export const Posts = () => {
 
                 {!selectedPost && (
                     <PostCard 
-                        key={"post"}
                         title={postData.title} 
                         description={postData.description} 
                         handleInputChange={handleInputChange}
-                        handleSubmit={handleSubmit}
+                        handleSubmit={createPost}
                     />
                 )}
                 {selectedPost ? (
