@@ -74,7 +74,7 @@ export const Posts = () => {
 
                 {!selectedPost && (
                     <PostCard 
-                        key="post"
+                        key={"post"}
                         title={postData.title} 
                         description={postData.description} 
                         handleInputChange={handleInputChange}

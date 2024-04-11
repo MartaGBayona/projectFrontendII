@@ -55,3 +55,25 @@
     cursor: pointer;
     transform: scale(1.02);
 }
+
+.inputCardDesign{
+    height: 2vw;
+    width: 43vw;
+
+    border: 0.3em solid rgb(69, 238, 162);
+    border-radius: 0.1em;
+    margin: 0.6em;
+    background-color: rgb(260, 260, 260);
+    color: black;
+}
+
+.textareaCardDesign{
+    height: 5vw;
+    width: 43vw;
+    resize: none;
+    border: 0.3em solid rgb(69, 238, 162);
+    border-radius: 0.1em;
+    margin: 0.6em;
+    background-color: rgb(260, 260, 260);
+    color: black;
+}

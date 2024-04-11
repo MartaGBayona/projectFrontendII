@@ -27,8 +27,8 @@
 
 }
 
-.titleDesignPost{
-        font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
+.titleDesignPost{font-family: 'New System', sans-serif;
+        /* font-family: 'Petyka - Retro Computer___SHORT', sans-serif; */
         font-size: 6vw;
         color: rgb(69, 238, 162);
         opacity: 0;
@@ -43,7 +43,8 @@
 }
 
 .postNameDesign {
-    font-family: 'Petyka - Retro Computer___SHORT', sans-serif;
+    font-family: 'New System', sans-serif;
+    /* font-family: 'Petyka - Retro Computer___SHORT', sans-serif; */
     color: rgb(69, 238, 162);
     font-size: 1.5vw;
     padding-bottom: 0.5em;

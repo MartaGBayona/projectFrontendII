@@ -30,16 +30,16 @@ export const UserCard = ({ title, description, isDeletable, onDelete }) => {
 }
 
 
-export const PostCard = ({key, title, description, handleInputChange, handleSubmit }) => {
+export const PostCard = ({ title, description, handleInputChange, handleSubmit }) => {
     return (
-        <div key={key} className="cardUserDesign">
-            <input 
+        <div key={"post"} className="cardUserDesign">
+            <input className="inputCardDesign"
                 type="text" 
                 placeholder="Título" 
                 value={title} 
                 onChange={(e) => handleInputChange("title", e.target.value)} 
             />
-            <textarea 
+            <textarea className="textareaCardDesign"
                 placeholder="Descripción" 
                 value={description} 
                 onChange={(e) => handleInputChange("description", e.target.value)}
