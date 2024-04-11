@@ -12,11 +12,7 @@ export const Header = () => {
     const rdxUser = useSelector(userData);
 
     const dispatch = useDispatch();
-    //const [profileName, setProfileName] = useState("")
 
-    useEffect(() => {
-        console.log(rdxUser, " credentials passport");
-    }, [rdxUser]);
 
     const [criteria, setCriteria] = useState("");
 
@@ -31,6 +27,8 @@ export const Header = () => {
 
         return () => clearTimeout(searching);
     }, [criteria, dispatch]);
+
+    
 
     return (
         <div className="headerDesign">

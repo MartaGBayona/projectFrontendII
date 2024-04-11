@@ -1,23 +1,19 @@
 .userDesign {
 
-    height: 100vh;
+    min-height: 94vh;
     width: 100vw;
 
-    background-color: rgb(30, 26, 29);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    background-image:url(../../../img/imgProyect/ImageDesignBody.png);
+    background-image:url(../../../img/posts.png);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
-
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     overflow-x: hidden;
 }
-
 .error {
     height: 1em;
     color: red;

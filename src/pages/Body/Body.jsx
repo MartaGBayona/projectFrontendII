@@ -1,15 +1,25 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Home } from "../Home/Home";
 import { Login } from "../Login/Login";
 import { Profile } from "../Profile/Profile";
 import { Register } from "../Register/Register";
 import { Posts } from "../Posts/Posts";
 import { Users } from "../Users/Users";
-import { userData } from "../../app/slices/userSlice";
+import { userData, logout } from "../../app/slices/userSlice";
+import { useDispatch } from "react-redux"; 
 
 export const Body = () => {
     const rdxUser = useSelector(userData);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // eslint-disable-next-line no-unused-vars
+    const handleLogout = () => {
+        dispatch(logout({ credentials: "" }));
+        navigate('/');
+    };
 
     return (
         <Routes>
@@ -26,7 +36,8 @@ export const Body = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/users" element = {<Users />}/>
+
+            <Route path="/users" element={<Users />} />
         </Routes>
     );
 };
