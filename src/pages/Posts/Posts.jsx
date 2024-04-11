@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { GetPosts, CreatePost } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
+import { PostLikes } from "../../services/apiCalls";
 
 export const Posts = () => {
     const [posts, setPosts] = useState([]);

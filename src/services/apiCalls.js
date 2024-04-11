@@ -261,5 +261,31 @@ export const DeleteUser = async (token, data) => {
     }
 };
 
+export const PostLikes = async (credentials, data) => {
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${credentials.token}`
+        },
+        body: JSON.stringify(data)
+    };
+
+    try {
+        const response = await fetch(`${root}posts/${data.id}`, options);
+        const data = await response.json();
+
+        if(!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        return error;
+    }
+}; 
+
+
+
 
 
