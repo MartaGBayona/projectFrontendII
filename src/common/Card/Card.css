@@ -45,7 +45,6 @@
     margin: 3vw;
     padding: 1vw;
 
-    font-family: "Josefin Sans", sans-serif;
     color: aliceblue;
 }
 
@@ -58,7 +57,7 @@
 
 .inputCardDesign{
     height: 2vw;
-    width: 50%;
+    width: 88%;
 
     border: 0.3em solid rgb(69, 238, 162);
     border-radius: 0.1em;
@@ -66,12 +65,12 @@
     background-color: rgb(260, 260, 260);
     font-family: "Roboto Mono", monospace;
     color: black;
-    font-size: 1vw;
+    font-size: 1.3vw;
 }
 
 .textareaCardDesign{
     height: 10vw;
-    width: 87%;
+    width: 88%;
     resize: none;
     border: 0.3em solid rgb(69, 238, 162);
     border-radius: 0.1em;
@@ -79,5 +78,25 @@
     background-color: rgb(260, 260, 260);
     font-family: "Roboto Mono", monospace;
     color: black;
-    font-size: 1vw;
+    font-size: 1.3vw;
+}
+
+.cardPostDesign{
+    min-height: 12vw;
+    width: 45vw;
+
+    background-color: rgb(49, 47, 47);
+    border: 0.3em solid rgb(69, 238, 162);
+
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3vw;
+    padding: 1vw;
+
+    color: aliceblue;
 }

@@ -32,7 +32,7 @@ export const UserCard = ({ title, description, isDeletable, onDelete }) => {
 
 export const PostCard = ({ title, description, handleInputChange, handleSubmit }) => {
     return (
-        <div key={"post"} className="cardUserDesign">
+        <div key={"post"} className="cardPostDesign">
             <input className="inputCardDesign"
                 type="text" 
                 placeholder="Título" 
