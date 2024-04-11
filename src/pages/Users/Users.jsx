@@ -7,7 +7,6 @@ import { userData } from "../../app/slices/userSlice";
 
 export const Users = () => {
     const rdxUser = useSelector(userData);
-
     const [users, setUsers] = useState([]);
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -21,7 +20,6 @@ export const Users = () => {
                     setErrorMsg("Error al obtener usuarios: " + error.message);
                 }
             };
-
             BringData();
         }
     }, [users, rdxUser.credentials.token]);

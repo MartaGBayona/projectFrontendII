@@ -2,7 +2,6 @@ import { CustomLink } from "../CustomLink/CustomLink"
 import { CustomInputHeader } from "../CustomInput/CustomInput";
 import { useState, useEffect } from "react";
 import "./Header.css"
-
 import { useSelector, useDispatch } from "react-redux";
 import { userData, logout } from "../../app/slices/userSlice";
 import { updateCriteria } from "../../app/slices/searchSlice";
