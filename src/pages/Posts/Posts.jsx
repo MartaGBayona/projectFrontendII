@@ -23,7 +23,7 @@ export const Posts = () => {
                 const fetched = await GetPosts({ token: rdxUser.credentials.token });
                 setPosts(fetched);
             } catch (error) {
-                console.log("Error fetching posts:", error);
+                console.error("Error fetching posts:", error);
             }
         };
 
@@ -38,12 +38,11 @@ export const Posts = () => {
         setPostData({
             ...postData,
             [name]: value
-        })
-    }
+        });
+    };
 
     const createPost = async () => {
         setIsCreating(true);
-        console.log("Post Data:", postData);
         
         if (postData.title.length > 25 || postData.description.length > 300) {
             console.error("Title or description is too long");
@@ -56,22 +55,18 @@ export const Posts = () => {
                 title: postData.title,
                 description: postData.description,
                 userId: rdxUser.credentials.userId
-            }
+            };
             const response = await CreatePost(rdxUser.credentials.token, newPostData);
             if (response.success) {
                 const createdPost = {
                     ...response.data,
                     user: response.user
                 };
-                console.log("New post created:", createdPost);
-                
                 setPosts(prevPosts => [createdPost, ...prevPosts]);
-    
                 setPostData({
                     title: "",
                     description: ""
                 });
-    
                 setIsCreating(false);
             } else {
                 console.error("Error creating new post:", response.message);
@@ -99,8 +94,8 @@ export const Posts = () => {
                 {selectedPost ? (
                     <div className="selectedPost">
                         <h2>Información del Post</h2>
-                        <div>Nombre del Usuario: {selectedPost.user.name}</div>
-                        <div>Email: {selectedPost.user.email}</div>
+                        <div>Nombre del Usuario: {selectedPost && selectedPost.user ? selectedPost.user.name : 'No disponible'}</div>
+                        <div>Email: {selectedPost && selectedPost.user ? selectedPost.user.email : 'No disponible'}</div>
                         <div>Título del Post: {selectedPost.title}</div>
                         <div>Descripción: {selectedPost.description}</div>
                         <div>Likes: {selectedPost.likes?.length || 0}</div>
@@ -111,6 +106,9 @@ export const Posts = () => {
                         {posts.length > 0 ? (
                             <div className="cardsRoster">
                                 {posts.map((post) => {
+                                    if (!post || !post.user) {
+                                        return null;
+                                    }
                                     return (
                                         <Card
                                             key={post._id}

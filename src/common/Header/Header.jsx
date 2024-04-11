@@ -50,7 +50,7 @@ export const Header = () => {
         <CustomLink path="/posts" title="Posts" />
     </>
 ) : (
-    <div>No tienes permisos para ver esta sección</div>
+    <div></div>
 )}
                     <div
                         className="outDesign"

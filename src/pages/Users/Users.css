@@ -49,4 +49,6 @@
     overflow-y: auto;
     overflow-x: hidden;
     animation: fadeIn 1.5s forwards;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.9vw;
 }
