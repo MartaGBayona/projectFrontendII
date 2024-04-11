@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./Posts.css";
 import { PostCard } from "../../common/Card/Card";
 import { Card } from "../../common/Card/Card";
@@ -31,6 +32,10 @@ export const Posts = () => {
     }, [rdxUser]);
 
     const clickedPosts = (post) => {
+        const updatedPost = {
+            ...post,
+            like: post.like || []
+        };
         setSelectedPost(post);
     };
 
@@ -98,7 +103,7 @@ export const Posts = () => {
                         <div>Email: {selectedPost && selectedPost.user ? selectedPost.user.email : 'No disponible'}</div>
                         <div>Título del Post: {selectedPost.title}</div>
                         <div>Descripción: {selectedPost.description}</div>
-                        <div>Likes: {selectedPost.likes?.length || 0}</div>
+                        <div>Likes: {selectedPost.like?.length || 0}</div>
                         <button onClick={() => setSelectedPost(null)}>Cerrar</button>
                     </div>
                 ) : (
@@ -127,6 +132,7 @@ export const Posts = () => {
                                                     {post.description}
                                                 </div>
                                             }
+                                            like={post.like}
                                             clickFunction={() => clickedPosts(post)}
                                         />
                                     );

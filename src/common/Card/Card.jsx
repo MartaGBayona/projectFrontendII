@@ -1,9 +1,9 @@
 import "./Card.css";
 
-export const Card = ({ userName, title, description, clickFunction, userEmail, likes}) => {
+export const Card = ({ userName, title, description,  clickFunction, userEmail, like}) => {
 
     const cardClicked = () => {
-        clickFunction({ userName, userEmail, likes });
+        clickFunction({ userName, userEmail, like });
     };
 
     return (
@@ -11,6 +11,18 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, l
             <div>{userName}</div>
             <div>{title}</div>
             <div>{description}</div>
+                        <div>
+                Likes: {like?.length || 0}
+                {like?.length > 0 && (
+                    <div>
+                        {like.map((like) => (
+                            
+                            <div key={like._id}>{like.userName}</div>
+                            
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
