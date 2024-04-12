@@ -133,6 +133,8 @@ export const Posts = () => {
                                                     {post.description}
                                                 </div>
                                             }
+                                            imagen={post.imagen}
+                                            
                                             like={post.like}
                                             clickFunction={() => clickedPosts(post)}
                                         />

@@ -1,6 +1,6 @@
 import "./Card.css";
 
-export const Card = ({ userName, title, description,  clickFunction, userEmail, like}) => {
+export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like }) => {
 
     const cardClicked = () => {
         clickFunction({ userName, userEmail, like });
@@ -11,14 +11,18 @@ export const Card = ({ userName, title, description,  clickFunction, userEmail, 
             <div>{userName}</div>
             <div>{title}</div>
             <div>{description}</div>
-                        <div>
+            {imagen && (
+                <button className="imageButton" onClick={cardClicked}>
+                    <img className="cardImage" src={imagen} alt="Card Image"></img>
+                </button>
+            )}
+            <img className="imageDesignLike" src="../../../img/AddLike.png" alt="Like"></img>
+            <div>
                 Likes: {like?.length || 0}
                 {like?.length > 0 && (
                     <div>
                         {like.map((like) => (
-                            
                             <div key={like._id}>{like.userName}</div>
-                            
                         ))}
                     </div>
                 )}
