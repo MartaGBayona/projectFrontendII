@@ -1,26 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./Users.css";
 import { useState, useEffect } from "react";
 import { GetUsers, DeleteUser } from "../../services/apiCalls";
 import { UserAdminCard } from "../../common/Card/Card";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
+import { useNavigate } from "react-router-dom"
 
 export const Users = () => {
     const rdxUser = useSelector(userData);
     const [users, setUsers] = useState([]);
     const [errorMsg, setErrorMsg] = useState("");
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (users.length === 0) {
-            const BringData = async () => {
-                try {
-                    const fetched = await GetUsers(rdxUser.credentials.token);
-                    setUsers(fetched);
-                } catch (error) {
-                    setErrorMsg("Error al obtener usuarios: " + error.message);
-                }
-            };
-            BringData();
+        if (rdxUser.credentials.token){
+            if (users.length === 0) {
+                const BringData = async () => {
+                    try {
+                        const fetched = await GetUsers(rdxUser.credentials.token);
+                        setUsers(fetched);
+                    } catch (error) {
+                        setErrorMsg("Error al obtener usuarios: " + error.message);
+                    }
+                };
+                BringData();
+            }
+        }
+        else {
+            navigate("/")
         }
     }, [users, rdxUser.credentials.token]);
 
