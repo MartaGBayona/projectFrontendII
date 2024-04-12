@@ -43,7 +43,7 @@ export const Header = () => {
                     <CustomLink path="/profile" title={rdxUser?.credentials?.user?.name} />
                     {rdxUser?.credentials?.user?.roleName === 'super_admin' ? (
     <>
-        <CustomLink path="/superAdmin" title="Panel de Admin" />
+        <CustomLink path="/superAdmin" title="Usuarios" />
     </>
 ) : (
     <div></div>

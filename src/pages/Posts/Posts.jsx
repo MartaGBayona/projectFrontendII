@@ -25,7 +25,6 @@ export const Posts = () => {
     const fetchPosts = async () => {
         try {
             const fetched = await GetPosts({ token: rdxUser.credentials.token });
-            console.log(rdxUser.credentials.user.roleName,"soy las credenciales")
             setPosts(fetched);
         } catch (error) {
             console.error("Error fetching posts:", error);
@@ -36,12 +35,25 @@ export const Posts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rdxUser]);
 
-    const clickedPosts = (post) => {
-        const updatedPost = {
-            ...post,
-            like: post.like || []
-        };
+    const selectPost = (post) => {
         setSelectedPost(post);
+    };
+
+    const toggleLike = async (postId) => {
+        try {
+            const response = await PostLikes(rdxUser.credentials.token, postId);
+            
+            if (response.success) {
+                const updatedPosts = posts.map((post) => 
+                    post._id === postId ? { ...post, like: response.data.like } : post
+                );
+                setPosts(updatedPosts);
+            } else {
+                console.error("Error toggling like:", response.message);
+            }
+        } catch (error) {
+            console.error("Error toggling like:", error);
+        }
     };
 
     const handleInputChange = (name, value) => {
@@ -73,6 +85,7 @@ export const Posts = () => {
                     ...response.data,
                     user: response.user
                 };
+                console.log("Created post:", createdPost);
                 setPosts(prevPosts => [createdPost, ...prevPosts]);
                 setPostData({
                     title: "",
@@ -136,7 +149,7 @@ export const Posts = () => {
                         <div>Título del Post: {selectedPost.title}</div>
                         <div>Descripción: {selectedPost.description}</div>
                         <div>Likes: {selectedPost.like?.length || 0}</div>
-                        <button onClick={() => setSelectedPost(null)}>Cerrar</button>
+                        <button className="buttonDesign" onClick={() => setSelectedPost(null)}>Cerrar</button>
                     </div>
                 ) : (
                     <>
@@ -165,10 +178,10 @@ export const Posts = () => {
                                                 </div>
                                             }
                                             imagen={post.imagen}
-                                            
                                             like={post.like}
-                                            clickFunction={() => clickedPosts(post)}
+                                            onSelect={() => selectPost(post)}
                                             onDelete={() => deletePostHandler(post._id)}
+                                            onToggleLike={() => toggleLike(post._id)}
                                             buttonDeleteDesign={rdxUser?.credentials?.user?.roleName === "super_admin" ? ("button-block") : ("button-none")}
                                         />
                                     );

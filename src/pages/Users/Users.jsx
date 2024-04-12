@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { useNavigate } from "react-router-dom"
 
-export const SuperAdmienInfo = () => {
+export const Users = () => {
     const rdxUser = useSelector(userData);
     const [users, setUsers] = useState([]);
     const [errorMsg, setErrorMsg] = useState("");

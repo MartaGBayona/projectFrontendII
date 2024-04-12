@@ -6,7 +6,7 @@
     background-color: rgb(49, 47, 47);
     border: 0.3em solid rgb(69, 238, 162);
 
-    transition: 0.5s;
+    /* transition: 0.5s; */
 
     display: flex;
     flex-direction: column;
@@ -21,12 +21,12 @@
 
 }
 
-.cardDesign:hover{
+/* .cardDesign:hover{
     transition: 0.5s;
 
     cursor: pointer;
-    transform: scale(1.02);
-}
+    /* transform: scale(1.02); */
+/* } */ 
 
 .cardUserDesign{
     min-height: 12vw;
@@ -126,6 +126,12 @@
     padding-left: 1%;
     width: 5%;
     height: 5%;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.imageDesignLike:hover{
+    transition: 0.5s;
+    transform: scale(1.25);
 }
 
 .imageButton {
@@ -136,13 +142,48 @@
 }
 
 .button-block{
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 2.5vw;
+    width: 14vw;
+
+    font-family: 'New System', sans-serif;
+    /* font-family: 'Petyka - Retro Computer___SHORT', sans-serif; */
+
+    background-color: rgb(69, 238, 162);
+    color: black;
+    font-weight: bold;
+    border: 0.2em solid black;
+    border-radius: 0.1em;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw;
+
+    transition: 0.2s;
+}
+
+.button-block:hover{
+    cursor: pointer;
+    transition: 0.2s;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+    border: 0.2em solid white;
+    background-color: rgb(59, 198, 136);
 }
 
 .button-none {
     display: none;
     visibility: hidden;
+}
+
+.buttonsCamp{
+    display: flex;
+    flex-direction: row;
+
 }

@@ -1,9 +1,13 @@
 import "./Card.css";
 
-export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like,buttonDeleteDesign, onDelete }) => {
+export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like, buttonDeleteDesign, onDelete, onSelect, onToggleLike }) => {
 
     const cardClicked = () => {
         clickFunction({ userName, userEmail, like });
+    };
+
+    const toggleLikeClicked = () => {
+        onToggleLike();
     };
 
     return (
@@ -13,10 +17,10 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, i
             <div>{description}</div>
             {imagen && (
                 <button className="imageButton" onClick={cardClicked}>
-                    <img className="cardImage" src={imagen} alt="Card Image"></img>
+                    <img className="cardImage" src={imagen} alt="Card Image" onClick={toggleLikeClicked}></img>
                 </button>
             )}
-            <img className="imageDesignLike" src="../../../img/AddLike.png" alt="Like"></img>
+            <img className="imageDesignLike" src="../../../img/AddLike.png" alt="Like" onClick={toggleLikeClicked}></img>
             <div>
                 Likes: {like?.length || 0}
                 {like?.length > 0 && (
@@ -27,14 +31,23 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, i
                     </div>
                 )}
             </div>
-            <div className={buttonDeleteDesign}>
-            <button onClick={onDelete}>
-                    Borrar
-                </button>
+            <div className="buttonsCamp">
+                <div className={buttonDeleteDesign}>
+                    <button onClick={onDelete}>
+                        Borrar
+                    </button>
+                </div>
+                <div>
+                    <button className="buttonDesign" onClick={onSelect}>
+                        Detalle
+                    </button>
+                </div>
             </div>
+
         </div>
     );
 };
+
 
 export const UserCard = ({ title, description, isDeletable, onDelete }) => {
     return (
@@ -55,14 +68,14 @@ export const PostCard = ({ title, description, handleInputChange, handleSubmit }
     return (
         <div className="cardPostDesign">
             <input className="inputCardDesign"
-                type="text" 
-                placeholder="Título" 
-                value={title} 
-                onChange={(e) => handleInputChange("title", e.target.value)} 
+                type="text"
+                placeholder="Título"
+                value={title}
+                onChange={(e) => handleInputChange("title", e.target.value)}
             />
             <textarea className="textareaCardDesign"
-                placeholder="Descripción" 
-                value={description} 
+                placeholder="Descripción"
+                value={description}
                 onChange={(e) => handleInputChange("description", e.target.value)}
             />
             <button className="buttonDesign" onClick={handleSubmit}>

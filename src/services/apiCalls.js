@@ -78,9 +78,6 @@ export const GetProfile = async (credentials) => {
     }
 };
 
-
-
-
 export const UpdateProfile = async (credentials, data) => {
     const options = {
         method: "PUT",
@@ -131,7 +128,6 @@ export const GetPosts = async (credentials) => {
         return error;
     }
 }
-
 
 export const GetOwnPosts = async (credentials) => {
     const options = {
@@ -261,29 +257,30 @@ export const DeleteUser = async (token, data) => {
     }
 };
 
-export const PostLikes = async (credentials, data) => {
+export const PostLikes = async (token, postId) => {
     const options = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${credentials.token}`
+            "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(data)
     };
 
     try {
-        const response = await fetch(`${root}posts/${data.id}`, options);
+        const response = await fetch(`${root}posts/like/${postId}`, options);
         const data = await response.json();
+        console.log("soy la data del like", data);
+        console.log(response, "soy id del post", postId);
 
         if(!data.success) {
-            throw new Error(data.message)
+            throw new Error(data.message);
         }
 
         return data;
     } catch (error) {
         return error;
     }
-}; 
+};
 
 
 
