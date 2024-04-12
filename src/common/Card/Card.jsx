@@ -1,13 +1,13 @@
 import "./Card.css";
 
-export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like }) => {
+export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like,buttonDeleteDesign, onDelete }) => {
 
     const cardClicked = () => {
         clickFunction({ userName, userEmail, like });
     };
 
     return (
-        <div className="cardDesign" onClick={cardClicked}>
+        <div className="cardDesign">
             <div>{userName}</div>
             <div>{title}</div>
             <div>{description}</div>
@@ -26,6 +26,11 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, i
                         ))}
                     </div>
                 )}
+            </div>
+            <div className={buttonDeleteDesign}>
+            <button onClick={onDelete}>
+                    Borrar
+                </button>
             </div>
         </div>
     );

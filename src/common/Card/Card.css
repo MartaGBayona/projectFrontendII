@@ -134,3 +134,15 @@
     cursor: pointer;
 
 }
+
+.button-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-none {
+    display: none;
+    visibility: hidden;
+}

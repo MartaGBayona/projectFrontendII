@@ -7,6 +7,7 @@ import { GetPosts, CreatePost } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
 import { userData } from "../../app/slices/userSlice";
 import { PostLikes } from "../../services/apiCalls";
+import { DeletePost } from "../../services/apiCalls";
 
 export const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -18,18 +19,21 @@ export const Posts = () => {
         description: ""
     });
     const rdxUser = useSelector(userData);
+    const [userPosts, setUserPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
+    const fetchPosts = async () => {
+        try {
+            const fetched = await GetPosts({ token: rdxUser.credentials.token });
+            console.log(rdxUser.credentials.user.roleName,"soy las credenciales")
+            setPosts(fetched);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const fetched = await GetPosts({ token: rdxUser.credentials.token });
-                setPosts(fetched);
-            } catch (error) {
-                console.error("Error fetching posts:", error);
-            }
-        };
-
         fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rdxUser]);
 
     const clickedPosts = (post) => {
@@ -63,6 +67,7 @@ export const Posts = () => {
                 userId: rdxUser.credentials.userId
             };
             const response = await CreatePost(rdxUser.credentials.token, newPostData);
+            
             if (response.success) {
                 const createdPost = {
                     ...response.data,
@@ -84,6 +89,31 @@ export const Posts = () => {
         }
     };
 
+    const deletePostHandler = async (postId) => {
+        setLoading(true);
+
+        try {
+            const result = await DeletePost(rdxUser.credentials.token, postId);
+
+            if (result && result.success) {
+                const updatedPosts = userPosts.filter(post => post._id !== postId);
+                setUserPosts(updatedPosts);
+                fetchPosts();
+            } else {
+                throw new Error(result.message || 'Error deleting post');
+            }
+
+            setLoading(false);
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        console.log("userPosts ha cambiado:", userPosts);
+    }, [userPosts]);
+
     return (
         <>
             <div className="postsDesign">
@@ -95,6 +125,7 @@ export const Posts = () => {
                         description={postData.description} 
                         handleInputChange={handleInputChange}
                         handleSubmit={createPost}
+                        
                     />
                 )}
                 {selectedPost ? (
@@ -137,6 +168,8 @@ export const Posts = () => {
                                             
                                             like={post.like}
                                             clickFunction={() => clickedPosts(post)}
+                                            onDelete={() => deletePostHandler(post._id)}
+                                            buttonDeleteDesign={rdxUser?.credentials?.user?.roleName === "super_admin" ? ("button-block") : ("button-none")}
                                         />
                                     );
                                 })}
