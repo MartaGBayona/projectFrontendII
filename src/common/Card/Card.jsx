@@ -32,10 +32,10 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, i
                 )}
             </div>
             <div className="buttonsCamp">
-                <div className={buttonDeleteDesign}>
-                    <button onClick={onDelete}>
+                <div  className={buttonDeleteDesign}>
+                    <div onClick={onDelete}>
                         Borrar
-                    </button>
+                    </div>
                 </div>
                 <div>
                     <button className="buttonDesign" onClick={onSelect}>
@@ -94,7 +94,7 @@ export const UserAdminCard = ({ name, email, role, isDeletable, onDelete }) => {
                 <div className="userRole">Rol: {role}</div>
             </div>
             {isDeletable && (
-                <button className="buttonDesign" onClick={onDelete}>Eliminar</button>
+                <button className="buttonDesignUser" onClick={onDelete}>Eliminar</button>
             )}
         </div>
     );

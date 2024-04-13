@@ -2,7 +2,7 @@
     min-height: 94vh;
     width: 100vw;
 
-    background-image:url(../../../img/posts.png);
+    background-image: linear-gradient(to right, rgb(16, 69, 35), rgb(66, 15, 117), rgba(46, 46, 46, 0.9));
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
@@ -12,7 +12,6 @@
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-
 }
 
 .selectedPost{
