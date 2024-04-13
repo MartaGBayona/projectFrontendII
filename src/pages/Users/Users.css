@@ -3,7 +3,7 @@
     min-height: 94vh;
     width: 100vw;
 
-    background-image:url(../../../img/posts.png);
+    background-image: linear-gradient(to right, #5b5b5b , #484848,  #212121);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;

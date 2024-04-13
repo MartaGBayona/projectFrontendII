@@ -205,3 +205,13 @@
 
     transition: 0.2s;
 }
+
+.buttonDesignUser:hover{
+    cursor: pointer;
+    transition: 0.2s;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+    border: 0.2em solid white;
+    background-color: rgb(59, 198, 136);
+}
