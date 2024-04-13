@@ -147,7 +147,7 @@ export const Profile = () => {
                                 <div className="contentDesignProfile">
                                 <div className="subtitleDesign">Mis Datos</div>
                                     <CustomInput
-                                        className={`inputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
+                                        className={`customInputDesign ${userError.nameError !== "" ? "inputDesignError" : ""}`}
                                         type={"text"}
                                         placeholder={""}
                                         name={"name"}
@@ -157,7 +157,7 @@ export const Profile = () => {
                                         onBlurFunction={(e) => checkError(e)}
                                     />
                                     <CustomInput
-                                        className={`inputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
+                                        className={`customInputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
                                         type={"email"}
                                         placeholder={""}
                                         name={"email"}

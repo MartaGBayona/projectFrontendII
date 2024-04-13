@@ -25,14 +25,14 @@ export const Card = ({ userName, title, description, clickFunction, userEmail, i
                 Likes: {like?.length || 0}
                 {like?.length > 0 && (
                     <div>
-                        {like.map((like) => (
-                            <div key={like._id}>{like.userName}</div>
+                        {like.map((likeItem) => (
+                            <div key={likeItem._id}>{likeItem.userName}</div>
                         ))}
                     </div>
                 )}
             </div>
             <div className="buttonsCamp">
-                <div  className={buttonDeleteDesign}>
+                <div className={buttonDeleteDesign}>
                     <div onClick={onDelete}>
                         Borrar
                     </div>

@@ -67,40 +67,41 @@ export const Register = () => {
                         Registrate
                     </div>
                     <CustomInput
-                        className={`customInputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
+                        className={`customInputDesign ${userError.nameError ? "inputDesignError" : ""}`}
                         type={"text"}
                         placeholder={"nombre"}
                         name={"name"}
                         value={user.name || ""}
-                        changeEmit={(e) => inputHandler(e)}
-                        onBlurFunction={(e) => checkError(e)}
+                        changeEmit={(e) => {
+                        inputHandler(e);
+                        checkError(e);
+                    }}
                     />
-                    <div className="error">{userError.firstNameError}</div>
-
-                    <div className="error">{userError.secondNameError}</div>
-
+                    <div className="error">{userError.nameError}</div>
                     <CustomInput
                         className={`customInputDesign ${userError.emailError ? "inputDesignError" : ""}`}
                         type={"email"}
                         placeholder={"email"}
                         name={"email"}
                         value={user.email || ""}
-                        changeEmit={(e) => inputHandler(e)}
-                        onBlurFunction={(e) => checkError(e)}
+                        changeEmit={(e) => {
+                        inputHandler(e);
+                        checkError(e);
+                    }}
                     />
                     <div className="error">{userError.emailError}</div>
-
                     <CustomInput
                         className={`customInputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
                         type={"password"}
                         placeholder={"contraseña"}
                         name={"password"}
                         value={user.password || ""}
-                        changeEmit={(e) => inputHandler(e)}
-                        onBlurFunction={(e) => checkError(e)}
+                        changeEmit={(e) => {
+                        inputHandler(e);
+                        checkError(e);
+                    }}
                     />
                     <div className="error">{userError.passwordError}</div>
-
                     <CustomButton
                         className={"buttonDesign"}
                         title={"Registro"}
@@ -108,7 +109,6 @@ export const Register = () => {
                     />
                     <div className="error">{msgError}</div>
                 </div>
-
             </div>
         </>
     )

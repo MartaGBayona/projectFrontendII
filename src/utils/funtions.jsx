@@ -22,7 +22,7 @@ export const validate = (type, value) => {
             return "";
             case "password":
             case "contraseña":
-                if(!value.length < 6 || !value.length >10) {
+                if(value.length < 6 || !value.length >10) {
                     return "El password debe contener entre 6 y 10 caracteres"
                 }
 
