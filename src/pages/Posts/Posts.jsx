@@ -12,7 +12,6 @@ import { DeletePost } from "../../services/apiCalls";
 export const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
-    // eslint-disable-next-line no-unused-vars
     const [isCreating, setIsCreating] = useState(false);
     const [postData, setPostData] = useState({
         title: "",
@@ -25,11 +24,13 @@ export const Posts = () => {
     const fetchPosts = async () => {
         try {
             const fetched = await GetPosts({ token: rdxUser.credentials.token });
+            console.log("Fetched posts:", fetched);
             setPosts(fetched);
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
     };
+
     useEffect(() => {
         fetchPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,6 +126,8 @@ export const Posts = () => {
 
     useEffect(() => {
         console.log("userPosts ha cambiado:", userPosts);
+        console.log("Posts:", posts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userPosts]);
 
     return (
@@ -138,56 +141,51 @@ export const Posts = () => {
                         description={postData.description} 
                         handleInputChange={handleInputChange}
                         handleSubmit={createPost}
-                        
                     />
                 )}
                 {selectedPost ? (
                     <div className="selectedPost">
-                    <div className="containerPostSelected">
-                        <div>Información del Post</div>
-                        <div>Nombre del Usuario: {selectedPost && selectedPost.user ? selectedPost.user.name : 'No disponible'}</div>
-                        <div>Email: {selectedPost && selectedPost.user ? selectedPost.user.email : 'No disponible'}</div>
-                        <div>Título del Post: {selectedPost.title}</div>
-                        <div>Descripción: {selectedPost.description}</div>
-                        <div>Likes: {selectedPost.like?.length || 0}</div>
-                        <button className="buttonDesign" onClick={() => setSelectedPost(null)}>Cerrar</button>
-                    </div>
+                        <div className="containerPostSelected">
+                            <div>Información del Post</div>
+                            <div>Nombre del Usuario: {selectedPost && selectedPost.user ? selectedPost.user.name : 'No disponible'}</div>
+                            <div>Email: {selectedPost && selectedPost.user ? selectedPost.user.email : 'No disponible'}</div>
+                            <div>Título del Post: {selectedPost.title}</div>
+                            <div>Descripción: {selectedPost.description}</div>
+                            <div>Likes: {selectedPost.like?.length || 0}</div>
+                            <button className="buttonDesign" onClick={() => setSelectedPost(null)}>Cerrar</button>
+                        </div>
                     </div>
                 ) : (
                     <>
                         {posts.length > 0 ? (
                             <div className="cardsRoster">
-                                {posts.map((post) => {
-                                    if (!post || !post.user) {
-                                        return null;
-                                    }
-                                    return (
-                                        <Card
-                                            key={post._id}
-                                            userName={
-                                                <div className="postNameDesign">
-                                                    {post.user.name}
-                                                </div>
-                                            }
-                                            title={
-                                                <div className="postTitle">
-                                                    {post.title}
-                                                </div>
-                                            }
-                                            description={
-                                                <div className="postDescription">
-                                                    {post.description}
-                                                </div>
-                                            }
-                                            imagen={post.imagen}
-                                            like={post.like}
-                                            onSelect={() => selectPost(post)}
-                                            onDelete={() => deletePostHandler(post._id)}
-                                            onToggleLike={() => toggleLike(post._id)}
-                                            buttonDeleteDesign={rdxUser?.credentials?.user?.roleName === "super_admin" ? ("button-block") : ("button-none")}
-                                        />
-                                    );
-                                })}
+                                {posts.filter(post => post.user !== null && post._id !== null).map((post) => (
+                                    <Card
+                                        key={post._id}
+                                        userName={
+                                            <div className="postNameDesign">
+                                                {post.user.name}
+                                            </div>
+                                        }
+                                        title={
+                                            <div className="postTitle">
+                                                {post.title}
+                                            </div>
+                                        }
+                                        description={
+                                            <div className="postDescription">
+                                                {post.description}
+                                            </div>
+                                        }
+                                        imagen={post.imagen}
+                                        like={post.like}
+                                        onSelect={() => selectPost(post)}
+                                        onDelete={() => deletePostHandler(post._id)}
+                                        onToggleLike={() => toggleLike(post._id)}
+                                        buttonDeleteDesign={rdxUser?.credentials?.user?.roleName === "super_admin" ? ("button-block") : ("button-none")}
+
+                                    />
+                                ))}
                             </div>
                         ) : (
                             <div>Los servicios están viniendo.</div>
