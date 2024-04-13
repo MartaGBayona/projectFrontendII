@@ -143,13 +143,15 @@ export const Posts = () => {
                 )}
                 {selectedPost ? (
                     <div className="selectedPost">
-                        <h2>Información del Post</h2>
+                    <div className="containerPostSelected">
+                        <div>Información del Post</div>
                         <div>Nombre del Usuario: {selectedPost && selectedPost.user ? selectedPost.user.name : 'No disponible'}</div>
                         <div>Email: {selectedPost && selectedPost.user ? selectedPost.user.email : 'No disponible'}</div>
                         <div>Título del Post: {selectedPost.title}</div>
                         <div>Descripción: {selectedPost.description}</div>
                         <div>Likes: {selectedPost.like?.length || 0}</div>
                         <button className="buttonDesign" onClick={() => setSelectedPost(null)}>Cerrar</button>
+                    </div>
                     </div>
                 ) : (
                     <>

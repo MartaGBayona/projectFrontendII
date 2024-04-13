@@ -15,6 +15,33 @@
 
 }
 
+.selectedPost{
+    min-height: 94vh;
+    width: 100vw;
+
+    background-image:url(../../../img/posts.png);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden;
+
+}
+
+.containerPostSelected{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: justify;
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.5vw;
+}
+
+
 .cardsServiceRoster {
     width: 100vw;
     height: 100vh;
