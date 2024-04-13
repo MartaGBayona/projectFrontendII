@@ -33,7 +33,7 @@ export const Posts = () => {
 
     useEffect(() => {
         fetchPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [rdxUser]);
 
     const selectPost = (post) => {
@@ -43,9 +43,9 @@ export const Posts = () => {
     const toggleLike = async (postId) => {
         try {
             const response = await PostLikes(rdxUser.credentials.token, postId);
-            
+
             if (response.success) {
-                const updatedPosts = posts.map((post) => 
+                const updatedPosts = posts.map((post) =>
                     post._id === postId ? { ...post, like: response.data.like } : post
                 );
                 setPosts(updatedPosts);
@@ -66,13 +66,13 @@ export const Posts = () => {
 
     const createPost = async () => {
         setIsCreating(true);
-        
+
         if (postData.title.length > 25 || postData.description.length > 300) {
             console.error("Title or description is too long");
             setIsCreating(false);
             return;
         }
-    
+
         try {
             const newPostData = {
                 title: postData.title,
@@ -80,7 +80,7 @@ export const Posts = () => {
                 userId: rdxUser.credentials.userId
             };
             const response = await CreatePost(rdxUser.credentials.token, newPostData);
-            
+
             if (response.success) {
                 const createdPost = {
                     ...response.data,
@@ -127,7 +127,7 @@ export const Posts = () => {
     useEffect(() => {
         console.log("userPosts ha cambiado:", userPosts);
         console.log("Posts:", posts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userPosts]);
 
     return (
@@ -136,9 +136,9 @@ export const Posts = () => {
                 <div className="titleDesignPost">Los temas del dia</div>
 
                 {!selectedPost && (
-                    <PostCard 
-                        title={postData.title} 
-                        description={postData.description} 
+                    <PostCard
+                        title={postData.title}
+                        description={postData.description}
                         handleInputChange={handleInputChange}
                         handleSubmit={createPost}
                     />
@@ -162,28 +162,15 @@ export const Posts = () => {
                                 {posts.filter(post => post.user !== null && post._id !== null).map((post) => (
                                     <Card
                                         key={post._id}
-                                        userName={
-                                            <div className="postNameDesign">
-                                                {post.user.name}
-                                            </div>
-                                        }
-                                        title={
-                                            <div className="postTitle">
-                                                {post.title}
-                                            </div>
-                                        }
-                                        description={
-                                            <div className="postDescription">
-                                                {post.description}
-                                            </div>
-                                        }
+                                        userName={post.user.name}
+                                        title={post.title}
+                                        description={post.description}
                                         imagen={post.imagen}
                                         like={post.like}
                                         onSelect={() => selectPost(post)}
                                         onDelete={() => deletePostHandler(post._id)}
                                         onToggleLike={() => toggleLike(post._id)}
                                         buttonDeleteDesign={rdxUser?.credentials?.user?.roleName === "super_admin" ? ("button-block") : ("button-none")}
-
                                     />
                                 ))}
                             </div>

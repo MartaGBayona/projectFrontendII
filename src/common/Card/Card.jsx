@@ -1,6 +1,6 @@
 import "./Card.css";
 
-export const Card = ({ post, userName, title, description, clickFunction, userEmail, imagen, like, buttonDeleteDesign, onDelete, onSelect, onToggleLike }) => {
+export const Card = ({ userName, title, description, clickFunction, userEmail, imagen, like, buttonDeleteDesign, onDelete, onSelect, onToggleLike }) => {
 
     const cardClicked = () => {
         clickFunction({ userName, userEmail, like });
@@ -11,10 +11,16 @@ export const Card = ({ post, userName, title, description, clickFunction, userEm
     };
 
     return (
-        <div className="cardDesign" key={post}>
-            <div>{userName}</div>
-            <div>{title}</div>
-            <div>{description}</div>
+        <div className="cardDesign">
+            <div className="postNameDesign">
+                {userName}
+            </div>
+            <div className="postTitle">
+                {title}
+            </div>
+            <div className="postDescription">
+                {description}
+            </div>
             {imagen && (
                 <button className="imageButton" onClick={cardClicked}>
                     <img className="cardImage" src={imagen} alt="Card Image" onClick={toggleLikeClicked}></img>
@@ -43,10 +49,10 @@ export const Card = ({ post, userName, title, description, clickFunction, userEm
                     </button>
                 </div>
             </div>
-
         </div>
     );
 };
+
 
 
 export const UserCard = ({ title, description, isDeletable, onDelete }) => {
