@@ -8,6 +8,7 @@ import { decodeToken } from "react-jwt";
 
 import { login } from "../../app/slices/userSlice";
 import { useDispatch } from "react-redux"
+import { validate } from "../../utils/funtions";
 
 export const Login = () => {
 
@@ -20,6 +21,13 @@ export const Login = () => {
         password: "",
     });
 
+    const [userError, setUserError] = useState({
+        emailError: "",
+        passwordError: "",
+    });
+
+    const [msgError, setMsgError] = useState("");
+
     const inputHandler = (e) => {
         setUser((prevState) => ({
             ...prevState,
@@ -27,53 +35,79 @@ export const Login = () => {
         }));
     };
 
+    const checkError = (e) => {
+        const error = validate(e.target.name, e.target.value);
+
+        setUserError((prevState) => ({
+            ...prevState,
+            [e.target.name + "Error"]: error
+        }))
+    }
+
     const loginMe = async () => {
-
-        const fetched = await LoginUser(user)
-
-        if (fetched.token) {
-            const decoded = decodeToken(fetched.token);
-
-            const passport = {
-                token: fetched.token,
-                user: decoded,
-            };
-
-            dispatch(login({ credentials: passport }));
-            
-            setTimeout(() => {
-                navigate("/")
-            }, 500)
+        try {
+            for (let elemento in user) {
+                if (user[elemento] === "") {
+                    throw new Error("Debes rellenar todos los campos");
+                }
+            }
+    
+            const fetched = await LoginUser(user);
+    
+            if (fetched.token) {
+                const decoded = decodeToken(fetched.token);
+    
+                const passport = {
+                    token: fetched.token,
+                    user: decoded,
+                };
+    
+                dispatch(login({ credentials: passport }));
+    
+                setMsgError(`Bienvenido de nuevo ${decoded.name}`);
+    
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
+            }
+        } catch (error) {
+            setMsgError(error.message);
         }
     };
 
     return (
         <div className="loginDesign">
             <div className="contentDesignLogin">
-            <div className="titleDesignRegister">
+                <div className="titleDesignRegister">
                     Acceso
                 </div>
                 <CustomInput
-                    className="customInputDesign"
+                    className={`customInputDesign ${userError.emailError !== "" ? "inputDesignError" : ""}`}
                     type="email"
                     name="email"
                     value={user.email || ""}
-                    changeEmit={inputHandler}
+                    changeEmit={(e) => inputHandler(e)}
+                    onBlurFunction={(e) => checkError(e)}
                 />
+                <div className="error">{userError.emailError}</div>
+                
                 <CustomInput
-                    className="customInputDesign"
+                    className={`customInputDesign ${userError.passwordError !== "" ? "inputDesignError" : ""}`}
                     type="password"
                     name="password"
                     value={user.password || ""}
-                    changeEmit={inputHandler}
+                    changeEmit={(e) => inputHandler(e)}
+                    onBlurFunction={(e) => checkError(e)}
                 />
+                <div className="error">{userError.passwordError}</div>
+
                 <CustomButton
                     className={"buttonDesign"}
                     title={"Acceso"}
                     functionEmit={loginMe}
                 />
+                <div className="error">{msgError}</div>
             </div>
         </div>
-
-    )
+    );
 }

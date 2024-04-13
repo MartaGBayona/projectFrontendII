@@ -7,9 +7,7 @@ export const validate = (type, value) => {
             if(value.length < 3) {
                 return "El nombre debe tener al menos 3 caracteres"
             }
-
             return "";
-
             case "email":
             case "e-mail":
             case "correo":
@@ -22,7 +20,6 @@ export const validate = (type, value) => {
                 }
             
             return "";
-
             case "password":
             case "contraseña":
                 if(!value.length < 6 || !value.length >10) {

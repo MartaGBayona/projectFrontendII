@@ -2,7 +2,7 @@
     min-height: 100vh;
     width: 100vw;
 
-    background-image:url(../../../img/posts.png);
+    background-image:url(../../../img/acces.png);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
@@ -41,4 +41,9 @@
     to {
         opacity: 1;
     }
+}
+
+.error {
+    height: 1em;
+    color: red;
 }

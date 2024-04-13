@@ -2,7 +2,7 @@
     min-height: 100vh;
     width: 100vw;
 
-    background-image: linear-gradient(to right, #5b5b5b , #484848,  #212121);
+    background-image:url(../../../img/back.png);
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
+    background-attachment: fixed;
 
 }
 

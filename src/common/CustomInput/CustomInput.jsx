@@ -1,10 +1,10 @@
 import "./CustomInput.css"
 
-export const CustomInput = ({ type, name, value, disabled, changeEmit }) => {
+export const CustomInput = ({className, type, name, value, disabled, changeEmit }) => {
 
     return (
         <input
-            className="customInputDesign"
+            className={className}
             type={type}
             name={name}
             value={value}
@@ -14,11 +14,11 @@ export const CustomInput = ({ type, name, value, disabled, changeEmit }) => {
     )
 }
 
-export const CustomInputHeader = ({ type, name, value,disabled, changeEmit }) => {
+export const CustomInputHeader = ({className, type, name, value,disabled, changeEmit }) => {
 
     return (
         <input
-            className="customInputHeaderDesign"
+            className={className}
             type={type}
             name={name}
             value={value}

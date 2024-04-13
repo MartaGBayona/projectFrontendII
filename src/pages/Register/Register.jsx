@@ -67,7 +67,7 @@ export const Register = () => {
                         Registrate
                     </div>
                     <CustomInput
-                        className={`inputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
+                        className={`customInputDesign ${userError.firstNameError ? "inputDesignError" : ""}`}
                         type={"text"}
                         placeholder={"nombre"}
                         name={"name"}
@@ -80,7 +80,7 @@ export const Register = () => {
                     <div className="error">{userError.secondNameError}</div>
 
                     <CustomInput
-                        className={`inputDesign ${userError.emailError ? "inputDesignError" : ""}`}
+                        className={`customInputDesign ${userError.emailError ? "inputDesignError" : ""}`}
                         type={"email"}
                         placeholder={"email"}
                         name={"email"}
@@ -91,7 +91,7 @@ export const Register = () => {
                     <div className="error">{userError.emailError}</div>
 
                     <CustomInput
-                        className={`inputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
+                        className={`customInputDesign ${userError.passwordError ? "inputDesignError" : ""}`}
                         type={"password"}
                         placeholder={"contraseña"}
                         name={"password"}

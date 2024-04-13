@@ -32,6 +32,7 @@ export const Header = () => {
     return (
         <div className="headerDesign">
             <CustomInputHeader
+                className="customInputHeaderDesign"
                 type="text"
                 name="criteria"
                 value={criteria || ""}
