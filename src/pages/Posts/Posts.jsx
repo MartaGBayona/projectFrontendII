@@ -20,16 +20,17 @@ export const Posts = () => {
     const rdxUser = useSelector(userData);
     const [userPosts, setUserPosts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showError, setShowError] = useState(false);
 
     const fetchPosts = async () => {
         try {
             const fetched = await GetPosts({ token: rdxUser.credentials.token });
             setPosts(fetched);
         } catch (error) {
-            console.error("Error fetching posts:", error);
+            setErrorMessage("Error fetching posts");
         }
     };
-
     useEffect(() => {
         fetchPosts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,10 +50,10 @@ export const Posts = () => {
                 );
                 setPosts(updatedPosts);
             } else {
-                console.error("Error toggling like:", response.message);
+                setErrorMessage("Error toggling like");
             }
         } catch (error) {
-            console.error("Error toggling like:", error);
+            setErrorMessage("Error toggling like");
         }
     };
 
@@ -66,8 +67,12 @@ export const Posts = () => {
     const createPost = async () => {
         setIsCreating(true);
 
-        if (postData.title.length > 25 || postData.description.length > 300) {
-            console.error("Title or description is too long");
+        function countWords(text) {
+            return text.split(/\s+/).filter(Boolean).length;
+        }
+    
+        if (countWords(postData.title) > 10 || countWords(postData.description) > 50) {
+            setErrorMessage("Máximo de 10 palabras en el título y 50 en la descripción");
             setIsCreating(false);
             return;
         }
@@ -92,11 +97,11 @@ export const Posts = () => {
                 });
                 setIsCreating(false);
             } else {
-                console.error("Error creating new post:", response.message);
+                setErrorMessage(response.message);
                 setIsCreating(false);
             }
         } catch (error) {
-            console.error("Error creating new post:", error);
+            setErrorMessage("Error creating new post");
             setIsCreating(false);
         }
     };
@@ -112,12 +117,12 @@ export const Posts = () => {
                 setUserPosts(updatedPosts);
                 fetchPosts();
             } else {
-                throw new Error(result.message || 'Error deleting post');
+                setErrorMessage(result.message || 'Error deleting post');
             }
 
             setLoading(false);
         } catch (error) {
-            console.error('Error deleting post:', error);
+            setErrorMessage("Error deleting post");
             setLoading(false);
         }
     };
@@ -126,18 +131,31 @@ export const Posts = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userPosts]);
 
+    useEffect(() => {
+        if (errorMessage) {
+            setShowError(true);
+            const timer = setTimeout(() => {
+                setShowError(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [errorMessage]);
+
     return (
         <>
             <div className="postsDesign">
                 <div className="titleDesignPost">Los temas del dia</div>
 
                 {!selectedPost && (
-                    <PostCard
-                        title={postData.title}
-                        description={postData.description}
-                        handleInputChange={handleInputChange}
-                        handleSubmit={createPost}
-                    />
+                    <>
+                        <PostCard
+                            title={postData.title}
+                            description={postData.description}
+                            handleInputChange={handleInputChange}
+                            handleSubmit={createPost}
+                        />
+                        {showError && <div className="error">{errorMessage}</div>}
+                    </>
                 )}
                 {selectedPost ? (
                     <div className="selectedPost">
