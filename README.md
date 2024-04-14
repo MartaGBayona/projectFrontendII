@@ -147,7 +147,7 @@ It's on the same view as the posts
 
 - Allow super admin to  modify users and posts
 
-- Create dropdown in header and in service request
+- Create dropdown in header and cards
 
 - Add images to backend services and add to frontend
 
@@ -155,7 +155,7 @@ It's on the same view as the posts
 
 - Responsive design
 
-- Deploy backend and frontend
+- Fronted
 
 
 
