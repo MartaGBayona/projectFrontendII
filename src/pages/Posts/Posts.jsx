@@ -24,7 +24,6 @@ export const Posts = () => {
     const fetchPosts = async () => {
         try {
             const fetched = await GetPosts({ token: rdxUser.credentials.token });
-            console.log("Fetched posts:", fetched);
             setPosts(fetched);
         } catch (error) {
             console.error("Error fetching posts:", error);
@@ -86,7 +85,6 @@ export const Posts = () => {
                     ...response.data,
                     user: response.user
                 };
-                console.log("Created post:", createdPost);
                 setPosts(prevPosts => [createdPost, ...prevPosts]);
                 setPostData({
                     title: "",
@@ -125,8 +123,6 @@ export const Posts = () => {
     };
 
     useEffect(() => {
-        console.log("userPosts ha cambiado:", userPosts);
-        console.log("Posts:", posts);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userPosts]);
 

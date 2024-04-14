@@ -168,8 +168,6 @@ export const DeletePost = async (credentials, postId) => {
         const response = await fetch(`${root}posts/${postId}`, options);
         const responseData = await response.json();
 
-        console.log("data de respuesta:", responseData);
-
         if (!response.ok) {
             throw new Error(responseData.message || 'Error en la solicitud DELETE');
         }
@@ -269,8 +267,6 @@ export const PostLikes = async (token, postId) => {
     try {
         const response = await fetch(`${root}posts/like/${postId}`, options);
         const data = await response.json();
-        console.log("soy la data del like", data);
-        console.log(response, "soy id del post", postId);
 
         if(!data.success) {
             throw new Error(data.message);

@@ -130,7 +130,6 @@ export const Profile = () => {
     };
 
     useEffect(() => {
-        console.log("userPosts ha cambiado:", userPosts);
     }, [userPosts]);
 
 
