@@ -96,12 +96,19 @@ role: "user"
 
 1. Home:
 
+## Bug  :collision:
+
+The header input is not working
 
 <image src="./img/ReadmeImageTop.png" alt="Home">
 
 
 2. Posts: 
 The superAdmin manages the posts from the same Posts page, having exclusive access to a button to delete the posts
+
+## Bug  :collision:
+
+The delete button on posts only works when clicked in the central position. Possible issues with CSS overlap.
 
 <image src="./img/Posts.png" alt="Posts">
 
@@ -152,6 +159,8 @@ It's on the same view as the posts
 - Add images to backend services and add to frontend
 
 - Footer design
+
+- Debugging
 
 - Responsive design
 
